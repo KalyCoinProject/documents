@@ -9,7 +9,7 @@ module.exports = {
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/logo.png',
     organizationName: 'kalycoinproject',
-    projectName: 'kalychain-docs',
+    projectName: 'documents',
     themes: [
         [
           require.resolve("@easyops-cn/docusaurus-search-local"),
