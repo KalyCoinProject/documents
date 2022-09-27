@@ -11,7 +11,7 @@ Before discussing the main data objects in Ethereum, we need to go over what Mer
 
 A **Merkle tree** is a _tree_ data structure, where the leaf nodes contain the hash of a block of data and the non-leaf nodes contain the hash of its children nodes.
 
-<figure><img src="../../.gitbook/assets/imagen (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/merkleTree-2d72decb8d989389f48beb21b38aea4d.png" alt=""><figcaption></figcaption></figure>
 
 In a Merkle tree, any change to the underlying data causes the hash of the node referring to the data to change. Since each parent node hash depends on the data of its children, any change to the data of a child node causes the parent hash to change. This happens to each parent node up to the root node. Therefore, any change to the data at the leaf nodes causes the root node hash to change. From this, we can derive two important properties:
 
@@ -53,7 +53,7 @@ One of the consequences of the codeHash being immutable is that if you deploy a 
 
 The Account Storage trie is where the data associated with an account is stored. This is only relevant for Contract Accounts, as for EOAs the storageRoot is **empty**, and the codeHash is the hash of an empty string.
 
-<figure><img src="../../.gitbook/assets/imagen (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/img.png" alt=""><figcaption></figcaption></figure>
 
 ### Transactions
 
@@ -95,7 +95,7 @@ The block header is the blockchain part of Ethereum. This is the structure that 
 
 The block body contains a list of transactions that have been included in this block, and a list of uncle (_ommer_) block headers.
 
-<figure><img src="../../.gitbook/assets/imagen (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/imagen (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 The block header contains the following fields:
 
