@@ -1,2 +1,2 @@
-# how-tos
+# How-tos
 
