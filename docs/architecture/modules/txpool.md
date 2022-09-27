@@ -178,7 +178,7 @@ The first scenario does not produce any error.
 * The transaction which was put back into the TxPool pending transaction queue is now processed and written in the block
   * The TxPool remaining gas is now 2000
 * The second block is written
-* ...![](<../../../.gitbook/assets/imagen (2).png>)
+* ...![](../../../.gitbook/assets/imagen.png)
 
 ####
 

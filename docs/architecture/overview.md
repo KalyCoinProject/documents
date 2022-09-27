@@ -12,7 +12,7 @@ This is something that is present in almost all parts of the kalychain. Below, y
 
 ### Kalychain Layering
 
-<figure><img src="../../.gitbook/assets/imagen (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/imagen (9).png" alt=""><figcaption></figcaption></figure>
 
 ### Libp2p
 
