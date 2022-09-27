@@ -14,7 +14,7 @@ giving node operators the ability to easily choose between the two when starting
 ## PoS Features
 
 The core logic behind the Proof of Stake implementation is situated within
-the [ValidatorSet Smart Contract](https://github.com/kalychain-lab/kalychain-contracts/blob/main/contracts/ValidatorSet.sol).
+the [ValidatorSet Smart Contract](https://github.com/kalycoinproject/kalychain-contracts/blob/main/contracts/ValidatorSet.sol).
 
 This contract is pre-deployed whenever a PoS mechanism kalychain chain is initialized, and is available on the address
 `0x0000000000000000000000000000000000001001` from block `0`.
@@ -103,7 +103,7 @@ The default size of an epoch is `100000` blocks in the kalychain.
 ## Contract pre-deployment
 
 The kalychain _pre-deploys_
-the [ValidatorSet Smart Contract](https://github.com/kalychain-lab/kalychain-contracts/blob/main/contracts/ValidatorSet.sol)
+the [ValidatorSet Smart Contract](https://github.com/kalycoinproject/kalychain-contracts/blob/main/contracts/ValidatorSet.sol)
 during **genesis generation** to the address `0x0000000000000000000000000000000000001001`.
 
 It does so without a running EVM, by modifying the blockchain state of the Smart Contract directly, using the passed in

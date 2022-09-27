@@ -31,10 +31,10 @@ Kalychain is built on Polygon Edge, which lets the project bootstrap a new block
 
 Industry standard wallets can be used to interact with Kalychain through the [JSON-RPC](/docs/working-with-node/query-json-rpc) endpoints and node operators can perform various actions on the nodes through the [gRPC](/docs/working-with-node/query-operator-info) protocol.
 
-To find out more about kalychain-lab, visit the [official website](https://dogecoin.community).
+To find out more about kalycoinproject, visit the [official website](https://dogecoin.community).
 
 
-**[GitHub repository](https://github.com/kalychain-lab/kalychain)**
+**[GitHub repository](https://github.com/kalycoinproject/kalychain)**
 
 
 

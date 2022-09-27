@@ -8,7 +8,7 @@ module.exports = {
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/logo.png',
-    organizationName: 'kalychain-lab',
+    organizationName: 'kalycoinproject',
     projectName: 'kalychain-docs',
     themes: [
         [
@@ -48,7 +48,7 @@ module.exports = {
                     position: 'left'
                 },
                 {
-                    href: 'https://github.com/kalychain-lab/kalychain',
+                    href: 'https://github.com/kalycoinproject/kalychain',
                     position: 'right',
                     className: 'header-github-link',
                     'aria-label': 'GitHub repository',

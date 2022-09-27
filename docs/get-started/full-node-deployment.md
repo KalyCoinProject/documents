@@ -21,22 +21,22 @@ Full node deployment of the Kalychain blockchain.
 * curl or wget
 * tar
 * gzip
-* [Latest Kalychain](https://github.com/kalychain-lab/kalychain/releases)
+* [Latest Kalychain](https://github.com/kalycoinproject/kalychain/releases)
 
 ## Download && Installation
 
 * wget:
 
 ```shell
-$ DOGECHAIN_VERSION=$(wget -qO- https://api.github.com/repos/kalychain-lab/kalychain/releases/latest | grep tag_name | cut -d '"' -f 4 | cut -d 'v' -f 2)
-$ wget -c https://github.com/kalychain-lab/kalychain/releases/download/v${DOGECHAIN_VERSION}/kalychain_${DOGECHAIN_VERSION}_linux_amd64.tar.gz
+$ DOGECHAIN_VERSION=$(wget -qO- https://api.github.com/repos/kalycoinproject/kalychain/releases/latest | grep tag_name | cut -d '"' -f 4 | cut -d 'v' -f 2)
+$ wget -c https://github.com/kalycoinproject/kalychain/releases/download/v${DOGECHAIN_VERSION}/kalychain_${DOGECHAIN_VERSION}_linux_amd64.tar.gz
 ```
 
 * curl:
 
 ```shell
-$ DOGECHAIN_VERSION=$(curl -s https://api.github.com/repos/kalychain-lab/kalychain/releases/latest | grep tag_name | cut -d '"' -f 4 | cut -d 'v' -f 2)
-$ curl -OL https://github.com/kalychain-lab/kalychain/releases/download/v${DOGECHAIN_VERSION}/kalychain_${DOGECHAIN_VERSION}_linux_amd64.tar.gz
+$ DOGECHAIN_VERSION=$(curl -s https://api.github.com/repos/kalycoinproject/kalychain/releases/latest | grep tag_name | cut -d '"' -f 4 | cut -d 'v' -f 2)
+$ curl -OL https://github.com/kalycoinproject/kalychain/releases/download/v${DOGECHAIN_VERSION}/kalychain_${DOGECHAIN_VERSION}_linux_amd64.tar.gz
 ```
 
 ## copy binary to /usr/local/bin

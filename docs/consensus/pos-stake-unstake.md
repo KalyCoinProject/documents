@@ -18,7 +18,7 @@ Currently, there is no limit to the number of validators that can stake funds on
 
 ## ValidatorSet Smart Contract
 
-The repo for the ValidatorSet Smart Contract is located [here](https://github.com/kalychain-lab/kalychain-contracts).
+The repo for the ValidatorSet Smart Contract is located [here](https://github.com/kalycoinproject/kalychain-contracts).
 
 It holds the necessary testing scripts, ABI files and most importantly the ValidatorSet Smart Contract itself.
 
@@ -76,7 +76,7 @@ npm install
 ### Setting up the provided helper scripts
 
 Scripts for interacting with the deployed ValidatorSet Smart Contract are located on
-the [ValidatorSet Smart Contract repo](https://github.com/kalychain-lab/kalychain-contracts).
+the [ValidatorSet Smart Contract repo](https://github.com/kalycoinproject/kalychain-contracts).
 
 Create an `.env` file with the following parameters in the Smart Contracts repo location:
 

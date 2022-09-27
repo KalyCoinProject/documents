@@ -9,7 +9,7 @@ Our recommendation is to use the pre-built releases and verify the provided chec
 
 ## Pre-built releases
 
-Please refer to the [GitHub Releases](https://github.com/kalychain-lab/kalychain/releases) page for a list of releases.
+Please refer to the [GitHub Releases](https://github.com/kalycoinproject/kalychain/releases) page for a list of releases.
 
 Kalychain comes with cross-compiled AMD64/ARM64 binaries for Darwin and Linux.
 
@@ -30,7 +30,7 @@ Prior to using `go install` make sure that you have Go `>=1.16` installed and pr
 The stable branch is `develop`.
 
 ```shell
-git clone https://github.com/kalychain-lab/kalychain.git
+git clone https://github.com/kalycoinproject/kalychain.git
 cd kalychain/
 go build main.go -o kalychain
 sudo mv kalychain /usr/local/bin
@@ -42,6 +42,6 @@ sudo mv kalychain /usr/local/bin
 
 Prior to using `go install` make sure that you have Go `>=1.16` installed and properly configured.
 
-`go install github.com/kalychain-lab/kalychain@dev`
+`go install github.com/kalycoinproject/kalychain@dev`
 
 The binary will be available in your `GOBIN` environment variable, and will include the latest changes from the mainline `develop` branch.
