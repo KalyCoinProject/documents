@@ -1,6 +1,10 @@
-# CLI Commands
+---
+id: cli-commands
+title: CLI Commands
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
 
 This section details the present commands, command flags in the kalychain, and how they're used.
 
@@ -10,1339 +14,1790 @@ The `--json` flag is supported on some commands. This flag instructs the command
 
 :::
 
-### Reference Version
+## Reference Version
 
 **`v1.1.3`**
 
-### Startup Commands
+## Startup Commands
 
-| **Command** | **Description**                                                                                                                                                 |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| server      | The default command that starts the blockchain client, by bootstrapping all modules together                                                                    |
-| genesis     | Generates a _genesis.json_ file, which is used to set a predefined chain state before starting the client. The structure of the genesis file is described below |
+| **Command** | **Description**                                              |
+| ----------- | ------------------------------------------------------------ |
+| server      | The default command that starts the blockchain client, by bootstrapping all modules together |
+| genesis     | Generates a *genesis.json* file, which is used to set a predefined chain state before starting the client. The structure of the genesis file is described below |
 
-#### server flags
+### server flags
 
-_**seal**_
+<h4><i>seal</i></h4>
 
-```
-server [--seal SHOULD_SEAL]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --seal
-server --seal=false
-```
+    server [--seal SHOULD_SEAL]
 
-Sets the flag indicating that the client should seal blocks. Default: `true`.
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --seal
+    server --seal=false
+
+  </TabItem>
+</Tabs>
+
+Sets the flag indicating that the client should seal blocks. Default: `true`. 
 
 Turn it off by explicitly setting it `false`.
 
-***
+---
 
-_**data-dir**_
+<h4><i>data-dir</i></h4>
 
-```
-server [--data-dir DATA_DIRECTORY]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --data-dir ./example-dir
-```
+    server [--data-dir DATA_DIRECTORY]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --data-dir ./example-dir
+
+  </TabItem>
+</Tabs>
 
 Used to specify the data directory used for storing kalycoinproject Kalychain client data. Default: `./kalychain-chain`.
 
-***
+---
 
-_**jsonrpc**_
+<h4><i>jsonrpc</i></h4>
 
-```
-server [--jsonrpc JSONRPC_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --jsonrpc 127.0.0.1:10000
-```
+    server [--jsonrpc JSONRPC_ADDRESS]
 
-Sets the address and port for the JSON-RPC service `address:port`.\
-If only port is defined `:10001` it will bind to all interfaces `0.0.0.0:10001`.\
-If omitted the service will bind to the default `address:port`.\
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --jsonrpc 127.0.0.1:10000
+
+  </TabItem>
+</Tabs>
+
+Sets the address and port for the JSON-RPC service `address:port`.   
+If only port is defined `:10001` it will bind to all interfaces `0.0.0.0:10001`.   
+If omitted the service will bind to the default `address:port`.   
 Default address: `0.0.0.0:8545`.
 
-***
+---
 
-_**json-rpc-batch-request-limit**_
+<h4><i>json-rpc-batch-request-limit</i></h4>
 
-```
-server [--json-rpc-batch-request-limit BATCH_REQUST_LIMIT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --json-rpc-batch-request-limit 5
-```
+    server [--json-rpc-batch-request-limit BATCH_REQUST_LIMIT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --json-rpc-batch-request-limit 5
+
+  </TabItem>
+</Tabs>
 
 Sets the max length to be considered when handling json-rpc batch requests. Default `1`.
 
 Turn it off by setting `0`.
 
-***
+---
 
-_**json-rpc-block-range-limit**_
+<h4><i>json-rpc-block-range-limit</i></h4>
 
-```
-server [--json-rpc-block-range-limit BLOCK_RANGE_LIMIT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --json-rpc-block-range-limit 100
-```
+    server [--json-rpc-block-range-limit BLOCK_RANGE_LIMIT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --json-rpc-block-range-limit 100
+
+  </TabItem>
+</Tabs>
 
 Sets the max block range to be considered when executing json-rpc requests that consider fromBlock/toBlock values. Default `100`.
 
 Turn it off by setting `0`.
 
-***
+---
 
-_**enable-ws**_
+<h4><i>enable-ws</i></h4>
 
-```
-server [--enable-ws SHOULD_ENABLE_WEBSOCKET]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --enable-ws
-```
+    server [--enable-ws SHOULD_ENABLE_WEBSOCKET]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --enable-ws
+
+  </TabItem>
+</Tabs>
 
 Sets the flag indicating that node enable WebSocket service. Default: `false`.
 
-***
+---
 
-_**grpc**_
+<h4><i>grpc</i></h4>
 
-```
-server [--grpc-address GRPC_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --grpc-address 127.0.0.1:9632
-```
+    server [--grpc-address GRPC_ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --grpc-address 127.0.0.1:9632
+
+  </TabItem>
+</Tabs>
 
 Sets the address and port for the gRPC service `address:port`. Default address: `127.0.0.1:9632`.
 
-***
+---
 
-_**libp2p**_
+<h4><i>libp2p</i></h4>
 
-```
-server [--libp2p LIBP2P_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --libp2p 127.0.0.1:1478
-```
+    server [--libp2p LIBP2P_ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --libp2p 127.0.0.1:1478
+
+  </TabItem>
+</Tabs>
 
 Sets the address and port for the libp2p service `address:port`. Default address: `127.0.0.1:1478`.
 
-***
+---
 
-_**prometheus**_
+<h4><i>prometheus</i></h4>
 
-```
-server [--prometheus PROMETHEUS_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --prometheus 127.0.0.1:10004
-```
+    server [--prometheus PROMETHEUS_ADDRESS]
 
-Sets the address and port for the prometheus server `address:port`.\
-If only port is defined `:5001` the service will bind to all interfaces `0.0.0.0:5001`.\
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --prometheus 127.0.0.1:10004
+
+  </TabItem>
+</Tabs>
+
+Sets the address and port for the prometheus server `address:port`.   
+If only port is defined `:5001` the service will bind to all interfaces `0.0.0.0:5001`.   
 If omitted the service will not be started.
 
-***
+---
 
-_**block-gas-target**_
+<h4><i>block-gas-target</i></h4>
 
-```
-server [--block-gas-target BLOCK_GAS_TARGET]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --block-gas-target 10000000
-```
+    server [--block-gas-target BLOCK_GAS_TARGET]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --block-gas-target 10000000
+
+  </TabItem>
+</Tabs>
 
 Sets the target block gas limit for the chain. If omitted, the value of the parent block is used. Default (not enforced): `0`.
 
-A more detailed explanation on the block gas target can be found in the [TxPool section](../architecture/modules/txpool/#block-gas-target).
+A more detailed explanation on the block gas target can be found in the [TxPool section](/docs/architecture/modules/txpool#block-gas-target).
 
-***
+---
 
-_**max-peers**_
+<h4><i>max-peers</i></h4>
 
-```
-server [--max-peers PEER_COUNT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --max-peers 40
-```
+    server [--max-peers PEER_COUNT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --max-peers 40
+
+  </TabItem>
+</Tabs>
 
 Sets the client's maximum peer count. Default: `40`.
 
 Peer limit should be specified either by using `max-peers` or `max-inbound/outbound-peers` flag.
 
-***
+---
 
-_**max-inbound-peers**_
+<h4><i>max-inbound-peers</i></h4>
 
-```
-server [--max-inbound-peers PEER_COUNT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --max-inbound-peers 32
-```
+    server [--max-inbound-peers PEER_COUNT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --max-inbound-peers 32
+
+  </TabItem>
+</Tabs>
 
 Sets the client's maximum inbound peer count. If `max-peers` is set, max-inbound-peer limit is calculated using the following formulae.
 
 `max-inbound-peer = InboundRatio * max-peers`, where `InboundRatio` is `0.8`.
 
-***
+---
 
-_**max-outbound-peers**_
+<h4><i>max-outbound-peers</i></h4>
 
-```
-server [--max-outbound-peers PEER_COUNT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --max-outbound-peers 8
-```
+    server [--max-outbound-peers PEER_COUNT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --max-outbound-peers 8
+
+  </TabItem>
+</Tabs>
 
 Sets the client's maximum outbound peer count. If `max-peers` is set, max-outbound-peer count is calculated using the following formulae.
 
 `max-outbound-peer = OutboundRatio * max-peers`, where `OutboundRatio` is `0.2`.
 
-***
+---
 
-_**log-level**_
+<h4><i>log-level</i></h4>
 
-```
-server [--log-level LOG_LEVEL]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --log-level DEBUG
-```
+    server [--log-level LOG_LEVEL]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --log-level DEBUG
+
+  </TabItem>
+</Tabs>
 
 Sets the log level for console output. Default: `INFO`.
 
-***
+---
 
-_**chain**_
+<h4><i>chain</i></h4>
 
-```
-server [--chain GENESIS_FILE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --chain /home/ubuntu/genesis.json
-```
+    server [--chain GENESIS_FILE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --chain /home/ubuntu/genesis.json
+
+  </TabItem>
+</Tabs>
 
 Specifies the genesis file used for starting the chain. Default: `./genesis.json`.
 
-***
+---
 
-_**join**_
+<h4><i>join</i></h4>
 
-```
-server [--join JOIN_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --join /ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
-```
+    server [--join JOIN_ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --join /ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
+
+  </TabItem>
+</Tabs>
 
 Specifies the address of the peer that should be joined.
 
-***
+---
 
-_**nat**_
+<h4><i>nat</i></h4>
 
-```
-server [--nat NAT_ADDRESS[:PORT]]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --nat 192.0.2.1
-server --nat 192.0.2.1:22222
-```
+    server [--nat NAT_ADDRESS[:PORT]]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --nat 192.0.2.1
+    server --nat 192.0.2.1:22222
+
+  </TabItem>
+</Tabs>
 
 Sets the external address (address:port), as can be seen by peers.
 
-***
+---
 
-_**dns**_
+<h4><i>dns</i></h4>
 
-```
-server [--dns DNS_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --dns dns4/example.io 
-```
+    server [--dns DNS_ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --dns dns4/example.io 
+
+  </TabItem>
+</Tabs>
 
 Sets the host DNS address. This can be used to advertise an external DNS. Supports `dns`,`dns4`,`dns6`.
 
-***
+---
 
-_**price-limit**_
+<h4>
+  <i>price-limit</i>
+</h4>
 
-```
-server [--price-limit PRICE_LIMIT]
-```
 
-```
-server --price-limit 250000000000
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    server [--price-limit PRICE_LIMIT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --price-limit 250000000000
+
+  </TabItem>
+</Tabs>
 
 Sets minimum gas price limit to enforce for acceptance into the pool. Default: `0`.
 
-***
+---
 
-_**max-slots**_
+<h4>
+  <i>max-slots</i>
+</h4>
 
-```
-server [--max-slots MAX_SLOTS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --max-slots 4096
-```
+    server [--max-slots MAX_SLOTS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --max-slots 4096
+
+  </TabItem>
+</Tabs>
 
 Sets maximum slots in the pool. Default: `4096`.
 
-***
+---
 
-_**config**_
+<h4><i>config</i></h4>
 
-```
-server [--config CLI_CONFIG_PATH]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --config ./myConfig.json
-```
+    server [--config CLI_CONFIG_PATH]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --config ./myConfig.json
+
+  </TabItem>
+</Tabs>
 
 Specifies the path to the CLI config. Supports `.json` and `.hcl`.
 
-***
+---
 
-_**secrets-config**_
+<h4><i>secrets-config</i></h4>
 
-```
-server [--secrets-config SECRETS_CONFIG]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --secrets-config ./secretsManagerConfig.json
-```
+    server [--secrets-config SECRETS_CONFIG]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --secrets-config ./secretsManagerConfig.json
+
+  </TabItem>
+</Tabs>
 
 Sets the path to the SecretsManager config file. Used for Hashicorp Vault and GCP SSM. If omitted, the local FS secrets manager is used.
 
-***
+---
 
-_**dev**_
+<h4><i>dev</i></h4>
 
-```
-server [--dev DEV_MODE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --dev
-```
+    server [--dev DEV_MODE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --dev
+
+  </TabItem>
+</Tabs>
 
 Sets the client to dev mode. Default: `false`.
 
-***
+---
 
-_**dev-interval**_
+<h4><i>dev-interval</i></h4>
 
-```
-server [--dev-interval DEV_INTERVAL]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --dev-interval 1
-```
+    server [--dev-interval DEV_INTERVAL]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --dev-interval 1
+
+  </TabItem>
+</Tabs>
 
 Sets the client's dev notification interval in seconds. Default: `0`.
 
-***
+---
 
-_**no-discover**_
+<h4><i>no-discover</i></h4>
 
-```
-server [--no-discover NO_DISCOVER]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --no-discover
-```
+    server [--no-discover NO_DISCOVER]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --no-discover
+
+  </TabItem>
+</Tabs>
 
 Prevents the client from discovering other peers. Default: `false`.
 
-***
+---
 
-_**restore**_
+<h4><i>restore</i></h4>
 
-```
-server [--restore RESTORE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --restore backup.dat
-```
+    server [--restore RESTORE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --restore backup.dat
+
+  </TabItem>
+</Tabs>
 
 Sets the path to the archive blockchain data to restore on initialization.
 
-***
+---
 
-_**block-time**_
+<h4><i>block-time</i></h4>
 
-```
-server [--block-time BLOCK_TIME]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --block-time 2
-```
+    server [--block-time BLOCK_TIME]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --block-time 2
+
+  </TabItem>
+</Tabs>
 
 Sets minimum block time in seconds (at least `1` s). Default: `2`
 
-***
+---
 
-_**access-control-allow-origins**_
+<h4><i>access-control-allow-origins</i></h4>
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server [--access-control-allow-origins ACCESS_CONTROL_ALLOW_ORIGINS]
-```
+    server [--access-control-allow-origins ACCESS_CONTROL_ALLOW_ORIGINS]
 
-```
-server --access-control-allow-origins "https://documents.doge.technology"
-```
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-Sets the authorized domains to be able to share responses from JSON-RPC requests.\
-Add multiple flags `--access-control-allow-origins "https://example1.com" --access-control-allow-origins "https://example2.com"` to authorize multiple domains.\
+    server --access-control-allow-origins "https://documents.doge.technology"
+
+  </TabItem>
+</Tabs>
+
+Sets the authorized domains to be able to share responses from JSON-RPC requests.   
+Add multiple flags `--access-control-allow-origins "https://example1.com" --access-control-allow-origins "https://example2.com"` to authorize multiple domains.   
 If omitted Access-Control-Allow-Origins header will be set to `*` and all domains will be authorized.
 
-***
+---
 
-_**daemon**_
+<h4><i>daemon</i></h4>
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server [--daemon SHOULD_RUN_AS_DAEMON]
-```
+    server [--daemon SHOULD_RUN_AS_DAEMON]
 
-```
-server --daemon
-```
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-Sets the flag indicating that the server ran as daemon. Default: `false`. Once the flag set, node would not use local secret files, but accept the private keys on the first start up.
+    server --daemon
 
-***
+  </TabItem>
+</Tabs>
 
-_**log-to**_
+Sets the flag indicating that the server ran as daemon. Default: `false`.
+Once the flag set, node would not use local secret files, but accept the private keys on the first start up.
 
-```
-server [--log-to LOG_FILE_PATH]
-```
+---
 
-```
-server --log-to ./kalychain-testing.log
-```
+<h4><i>log-to</i></h4>
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-Sets the flag to write all logs to the file at specified location instead of writing them to console. If omitted, logs would be written to console.
+    server [--log-to LOG_FILE_PATH]
 
-***
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-_**enable-graphql**_
+    server --log-to ./kalychain-testing.log
 
-```
-server [--enable-graphql SHOULD_ENABLE_GRAPHQL]
-```
+  </TabItem>
+</Tabs>
 
-```
-server --enable-graphql
-```
+Sets the flag to write all logs to the file at specified location instead of writing them to console.
+If omitted, logs would be written to console.
+
+---
+
+<h4><i>enable-graphql</i></h4>
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    server [--enable-graphql SHOULD_ENABLE_GRAPHQL]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --enable-graphql
+
+  </TabItem>
+</Tabs>
 
 Sets the flag indicating that node enable graphql service. Default: `false`.
 
-***
+---
 
-_**graphql-address**_
+<h4><i>graphql-address</i></h4>
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server [--graphql-address GRAPHQL_ADDRESS]
-```
+    server [--graphql-address GRAPHQL_ADDRESS]
 
-```
-server --graphql-address :9898
-```
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --graphql-address :9898
+
+  </TabItem>
+</Tabs>
 
 The GraphQL interface. Default: `127.0.0.1:9898`.
 
-***
+---
 
-_**promote-outdate-seconds**_
+<h4><i>promote-outdate-seconds</i></h4>
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server [--promote-outdate-seconds PROMOTE_OUTDATE_SECONDS]
-```
+    server [--promote-outdate-seconds PROMOTE_OUTDATE_SECONDS]
 
-```
-server --promote-outdate-seconds 3600
-```
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --promote-outdate-seconds 3600
+
+  </TabItem>
+</Tabs>
 
 Account in the pool not promoted for a long time would be pruned. Default: `3600`.
 
-***
+---
 
-_**prune-tick-seconds**_
+<h4><i>prune-tick-seconds</i></h4>
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server [--prune-tick-seconds PROMOTE_OUTDATE_SECONDS]
-```
+    server [--prune-tick-seconds PROMOTE_OUTDATE_SECONDS]
 
-```
-server --prune-tick-seconds 300
-```
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-Tick seconds for pruning account future transactions in the pool. Default: `300`. Should not be larger than `promote-outdate-seconds` flag, otherwise, unknown errors might happen.
+    server --prune-tick-seconds 300
 
-***
+  </TabItem>
+</Tabs>
 
-_**leveldb.bloom-bits**_
+Tick seconds for pruning account future transactions in the pool. Default: `300`.
+Should not be larger than `promote-outdate-seconds` flag, otherwise, unknown errors 
+might happen.
 
-```
-server [--leveldb.bloom-bits BLOOM_BITS]
-```
+---
 
-```
-server --leveldb.bloom-bits 4096
-```
+<h4><i>leveldb.bloom-bits</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    server [--leveldb.bloom-bits BLOOM_BITS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --leveldb.bloom-bits 4096
+
+  </TabItem>
+</Tabs>
 
 Sets the bits of leveldb bloom filters. Default: `2048`.
 
-***
+---
 
-_**leveldb.cache-size**_
+<h4><i>leveldb.cache-size</i></h4>
 
-```
-server [--leveldb.cache-size CACHE_MB_SIZE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --leveldb.cache-size 2048
-```
+    server [--leveldb.cache-size CACHE_MB_SIZE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --leveldb.cache-size 2048
+
+  </TabItem>
+</Tabs>
 
 Sets the size of the leveldb cache in MB. Default: `1024`.
 
-***
+---
 
-_**leveldb.handles**_
+<h4><i>leveldb.handles</i></h4>
 
-```
-server [--leveldb.handles OPEN_FILES]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --leveldb.handles 1024
-```
+    server [--leveldb.handles OPEN_FILES]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --leveldb.handles 1024
+
+  </TabItem>
+</Tabs>
 
 Sets the number of handles to leveldb open files. Default: `512`.
 
-***
+---
 
-_**leveldb.table-size**_
+<h4><i>leveldb.table-size</i></h4>
 
-```
-server [--leveldb.table-size TBL_MB_SIZE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --leveldb.table-size 8
-```
+    server [--leveldb.table-size TBL_MB_SIZE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --leveldb.table-size 8
+
+  </TabItem>
+</Tabs>
 
 Sets the leveldb 'sorted table' size in MB. Default: `8`.
 
-***
+---
 
-_**leveldb.total-table-size**_
+<h4><i>leveldb.total-table-size</i></h4>
 
-```
-server [--leveldb.total-table-size TOTAL_TBL_MB_SIZE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --leveldb.total-table-size 32
-```
+    server [--leveldb.total-table-size TOTAL_TBL_MB_SIZE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --leveldb.total-table-size 32
+
+  </TabItem>
+</Tabs>
 
 Sets limits leveldb total size of 'sorted table' for each level in MB. Default: `32`.
 
-***
+---
 
-_**pprof**_
+<h4><i>pprof</i></h4>
 
-```
-server [--pprof SHOULD_ENABLE_PPROF]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --pprof
-```
+    server [--pprof SHOULD_ENABLE_PPROF]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --pprof
+
+  </TabItem>
+</Tabs>
 
 Enables the pprof server. Default: `false`.
 
-***
+---
 
-_**pprof-address**_
+<h4><i>pprof-address</i></h4>
 
-```
-server [--pprof-address SHOULD_ENABLE_PPROF]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-server --pprof-address 127.0.0.1:6060
-```
+    server [--pprof-address SHOULD_ENABLE_PPROF]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    server --pprof-address 127.0.0.1:6060
+
+  </TabItem>
+</Tabs>
 
 Sets the address and port for the pprof service. Default address: `127.0.0.1:6060`.
 
-***
+---
 
-#### genesis flags
+### genesis flags
 
-_**dir**_
+<h4><i>dir</i></h4>
 
-```
-genesis [--dir DIRECTORY]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --dir ./genesis.json
-```
+    genesis [--dir DIRECTORY]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --dir ./genesis.json
+
+  </TabItem>
+</Tabs>
 
 Sets the directory for the kalychain genesis data. Default: `./genesis.json`.
 
-***
+---
 
-_**name**_
+<h4><i>name</i></h4>
 
-```
-genesis [--name NAME]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --name test-chain
-```
+    genesis [--name NAME]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --name test-chain
+
+  </TabItem>
+</Tabs>
 
 Sets the name for the chain. Default: `kalychain`.
 
-***
+---
 
-_**pos**_
+<h4><i>pos</i></h4>
 
-```
-genesis [--pos IS_POS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --pos
-```
+    genesis [--pos IS_POS]
 
-Sets the flag indicating that the client should use Proof of Stake IBFT. Defaults to Proof of Authority if flag is not provided or `false`.
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-***
+    genesis --pos
 
-_**epoch-size**_
+  </TabItem>
+</Tabs>
 
-```
-genesis [--epoch-size EPOCH_SIZE]
-```
+Sets the flag indicating that the client should use Proof of Stake IBFT.
+Defaults to Proof of Authority if flag is not provided or `false`.
 
-```
-genesis --epoch-size 50
-```
+---
+
+<h4><i>epoch-size</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    genesis [--epoch-size EPOCH_SIZE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --epoch-size 50
+
+  </TabItem>
+</Tabs>
 
 Sets the epoch size for the chain. Default `100000`.
 
-***
+---
 
-_**premine**_
+<h4><i>premine</i></h4>
 
-```
-genesis [--premine ADDRESS:VALUE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --premine 0x3956E90e632AEbBF34DEB49b71c28A83Bc029862:1000000000000000000000
-```
+    genesis [--premine ADDRESS:VALUE]
 
-Sets the premined accounts and balances in the format `address:amount`. The amount can be in either decimal or hex. Default premined balance: `0x3635C9ADC5DEA00000`.
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-***
+    genesis --premine 0x3956E90e632AEbBF34DEB49b71c28A83Bc029862:1000000000000000000000
 
-_**chain-id**_
+  </TabItem>
+</Tabs>
 
-```
-genesis [--chain-id CHAIN_ID]
-```
+Sets the premined accounts and balances in the format `address:amount`.
+The amount can be in either decimal or hex.
+Default premined balance: `0x3635C9ADC5DEA00000`.
 
-```
-genesis --chain-id 200
-```
+---
+
+<h4><i>chain-id</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    genesis [--chain-id CHAIN_ID]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --chain-id 200
+
+  </TabItem>
+</Tabs>
 
 Sets the ID of the chain. Default: `3888`.
 
-***
+---
 
-_**ibft-validators-prefix-path**_
+<h4><i>ibft-validators-prefix-path</i></h4>
 
-```
-genesis [--ibft-validators-prefix-path IBFT_VALIDATORS_PREFIX_PATH]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --ibft-validators-prefix-path test-chain-
-```
+    genesis [--ibft-validators-prefix-path IBFT_VALIDATORS_PREFIX_PATH]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --ibft-validators-prefix-path test-chain-
+
+  </TabItem>
+</Tabs>
 
 Prefix path for validator folder directory. Needs to be present if the flag `ibft-validator` is omitted.
 
-***
+---
 
-_**ibft-validator**_
+<h4><i>ibft-validator</i></h4>
 
-```
-genesis [--ibft-validator IBFT_VALIDATOR_LIST]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --ibft-validator 0xC12bB5d97A35c6919aC77C709d55F6aa60436900
-```
+    genesis [--ibft-validator IBFT_VALIDATOR_LIST]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --ibft-validator 0xC12bB5d97A35c6919aC77C709d55F6aa60436900
+
+  </TabItem>
+</Tabs>
 
 Sets passed in addresses as IBFT validators. Needs to be present if the flag `ibft-validators-prefix-path` is omitted.
 
-***
+---
 
-_**block-gas-limit**_
+<h4><i>block-gas-limit</i></h4>
 
-```
-genesis [--block-gas-limit BLOCK_GAS_LIMIT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --block-gas-limit 5000000
-```
+    genesis [--block-gas-limit BLOCK_GAS_LIMIT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --block-gas-limit 5000000
+
+  </TabItem>
+</Tabs>
 
 Refers to the maximum amount of gas used by all operations in a block. Default: `5242880`.
 
-***
+---
 
-_**consensus**_
+<h4><i>consensus</i></h4>
 
-```
-genesis [--consensus CONSENSUS_PROTOCOL]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --consensus ibft
-```
+    genesis [--consensus CONSENSUS_PROTOCOL]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --consensus ibft
+
+  </TabItem>
+</Tabs>
 
 Sets consensus protocol. Default: `pow`.
 
-***
+---
 
-_**bootnode**_
+<h4><i>bootnode</i></h4>
 
-```
-genesis [--bootnode BOOTNODE_URL]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --bootnode /ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
-```
+    genesis [--bootnode BOOTNODE_URL]
 
-Multiaddr URL for p2p discovery bootstrap. This flag can be used multiple times. Instead of an IP address, the DNS address of the bootnode can be provided.
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-***
+    genesis --bootnode /ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
 
-_**bridge-owner**_
+  </TabItem>
+</Tabs>
 
-```
-genesis [--bridge-owner BRIDGE_CONTRACT_OWNER]
-```
+Multiaddr URL for p2p discovery bootstrap. This flag can be used multiple times.
+Instead of an IP address, the DNS address of the bootnode can be provided.
 
-```
-genesis --bridge-owner 0xeeA13dF426dcF62999B9bFf912f58E25f4f9Ba2f
-```
+---
+
+<h4><i>bridge-owner</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    genesis [--bridge-owner BRIDGE_CONTRACT_OWNER]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --bridge-owner 0xeeA13dF426dcF62999B9bFf912f58E25f4f9Ba2f
+
+  </TabItem>
+</Tabs>
 
 Sets the system bridge contract owner address.
 
-***
+---
 
-_**bridge-signer**_
+<h4><i>bridge-signer</i></h4>
 
-```
-genesis [--bridge-signer SIGNER_ACCOUNT_LIST]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --bridge-signer 0xa39b6aA2CD5139bA742f9D9cd4a72458D78d5c4E --bridge-signer 0x1b4297618913C492179C308322Aa6e66daF625D4
-```
+    genesis [--bridge-signer SIGNER_ACCOUNT_LIST]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --bridge-signer 0xa39b6aA2CD5139bA742f9D9cd4a72458D78d5c4E --bridge-signer 0x1b4297618913C492179C308322Aa6e66daF625D4
+
+  </TabItem>
+</Tabs>
 
 Sets the system bridge contract signer address. This flag can be used multiple times.
 
-***
+---
 
-_**validatorset-owner**_
+<h4><i>validatorset-owner</i></h4>
 
-```
-genesis [--validatorset-owner VALIDATOR_CONTRACT_OWNER]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --validatorset-owner 0xeeA13dF426dcF62999B9bFf912f58E25f4f9Ba2f
-```
+    genesis [--validatorset-owner VALIDATOR_CONTRACT_OWNER]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --validatorset-owner 0xeeA13dF426dcF62999B9bFf912f58E25f4f9Ba2f
+
+  </TabItem>
+</Tabs>
 
 Sets the system ValidatorSet contract owner address.
 
-***
+---
 
-_**vault-owner**_
+<h4><i>vault-owner</i></h4>
 
-```
-genesis [--vault-owner VAULT_CONTRACT_OWNER]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-genesis --vault-owner 0xeeA13dF426dcF62999B9bFf912f58E25f4f9Ba2f
-```
+    genesis [--vault-owner VAULT_CONTRACT_OWNER]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    genesis --vault-owner 0xeeA13dF426dcF62999B9bFf912f58E25f4f9Ba2f
+
+  </TabItem>
+</Tabs>
 
 Sets the system vault contract owner address.
 
-***
+---
 
-### Operator Commands
+## Operator Commands
 
-#### Peers Commands
+### Peers Commands
 
-| **Command**  | **Description**                                                                     |
-| ------------ | ----------------------------------------------------------------------------------- |
-| peers add    | Adds a new peer using their libp2p address                                          |
-| peers list   | Lists all the peers the client is connected to through libp2p                       |
-| peers status | Returns the status of a specific peer from the peers list, using the libp2p address |
+| **Command**            | **Description**                                                                     |
+|------------------------|-------------------------------------------------------------------------------------|
+| peers add              | Adds a new peer using their libp2p address |
+| peers list             | Lists all the peers the client is connected to through libp2p |
+| peers status           | Returns the status of a specific peer from the peers list, using the libp2p address |
 
-#### peers add flags
+<h3>peers add flags</h3>
 
-_**addr**_
+<h4><i>addr</i></h4>
 
-```
-peers add --addr PEER_ADDRESS
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-peers add --addr /ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
-```
+    peers add --addr PEER_ADDRESS
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    peers add --addr /ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
+
+  </TabItem>
+</Tabs>
 
 Peer's libp2p address in the multiaddr format.
 
-***
+---
 
-_**grpc-address**_
+<h4><i>grpc-address</i></h4>
 
-```
-peers add [--grpc-address GRPC_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-peers add --grpc-address 127.0.0.1:10003
-```
+    peers add [--grpc-address GRPC_ADDRESS]
 
-Address of the gRPC API. Default: `127.0.0.1:9632`.
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-#### peers list flags
+    peers add --grpc-address 127.0.0.1:10003
 
-_**grpc-address**_
-
-```
-peers list [--grpc-address GRPC_ADDRESS]
-```
-
-```
-peers list --grpc-address 127.0.0.1:10003
-```
+  </TabItem>
+</Tabs>
 
 Address of the gRPC API. Default: `127.0.0.1:9632`.
 
-#### peers status flags
+<h3>peers list flags</h3>
 
-_**peer-id**_
+<h4><i>grpc-address</i></h4>
 
-```
-peers status --peer-id PEER_ID
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-peers status --peer-id 16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
-```
+    peers list [--grpc-address GRPC_ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    peers list --grpc-address 127.0.0.1:10003
+
+  </TabItem>
+</Tabs>
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+<h3>peers status flags</h3>
+
+<h4><i>peer-id</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    peers status --peer-id PEER_ID
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    peers status --peer-id 16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
+
+  </TabItem>
+</Tabs>
 
 Libp2p node ID of a specific peer within p2p network.
 
-***
+---
 
-_**grpc-address**_
+<h4><i>grpc-address</i></h4>
 
-```
-peers status [--grpc-address GRPC_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-peers status --grpc-address 127.0.0.1:10003
-```
+    peers status [--grpc-address GRPC_ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    peers status --grpc-address 127.0.0.1:10003
+
+  </TabItem>
+</Tabs>
 
 Address of the gRPC API. Default: `127.0.0.1:9632`.
 
-#### IBFT Commands
+### IBFT Commands
 
-| **Command**     | **Description**                                                                                       |
-| --------------- | ----------------------------------------------------------------------------------------------------- |
-| ibft snapshot   | Returns the IBFT snapshot                                                                             |
-| ibft candidates | Queries the current set of proposed candidates, as well as candidates that have not been included yet |
-| ibft propose    | Proposes a new candidate to be added/removed from the validator set                                   |
-| ibft status     | Returns the overall status of the IBFT client                                                         |
-| ibft switch     | Add fork configurations into genesis.json file to switch IBFT type                                    |
+| **Command**            | **Description**                                                                     |
+|------------------------|-------------------------------------------------------------------------------------|
+| ibft snapshot             | Returns the IBFT snapshot                    |
+| ibft candidates  | Queries the current set of proposed candidates, as well as candidates that have not been included yet |
+| ibft propose                | Proposes a new candidate to be added/removed from the validator set        |
+| ibft status                | Returns the overall status of the IBFT client   |
+| ibft switch                | Add fork configurations into genesis.json file to switch IBFT type |
 
-#### ibft snapshot flags
 
-_**number**_
+<h3>ibft snapshot flags</h3>
 
-```
-ibft snapshot [--number BLOCK_NUMBER]
-```
+<h4><i>number</i></h4>
 
-```
-ibft snapshot --number 100
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    ibft snapshot [--number BLOCK_NUMBER]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    ibft snapshot --number 100
+
+  </TabItem>
+</Tabs>
 
 The block height (number) for the snapshot.
 
-***
+---
 
-_**grpc-address**_
+<h4><i>grpc-address</i></h4>
 
-```
-ibft snapshot [--grpc-address GRPC_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-ibft snapshot --grpc-address 127.0.0.1:10003
-```
+    ibft snapshot [--grpc-address GRPC_ADDRESS]
 
-Address of the gRPC API. Default: `127.0.0.1:9632`.
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-#### ibft candidates flags
+    ibft snapshot --grpc-address 127.0.0.1:10003
 
-_**grpc-address**_
-
-```
-ibft candidates [--grpc-address GRPC_ADDRESS]
-```
-
-```
-ibft candidates --grpc-address 127.0.0.1:10003
-```
+  </TabItem>
+</Tabs>
 
 Address of the gRPC API. Default: `127.0.0.1:9632`.
 
-#### ibft propose flags
+<h3>ibft candidates flags</h3>
 
-_**vote**_
+<h4><i>grpc-address</i></h4>
 
-```
-ibft propose --vote VOTE
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-ibft propose --vote auth
-```
+    ibft candidates [--grpc-address GRPC_ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    ibft candidates --grpc-address 127.0.0.1:10003
+
+  </TabItem>
+</Tabs>
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+<h3>ibft propose flags</h3>
+
+<h4><i>vote</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    ibft propose --vote VOTE
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    ibft propose --vote auth
+
+  </TabItem>
+</Tabs>
 
 Proposes a change to the validator set. Possible values: `[auth, drop]`.
 
-***
+---
 
-_**addr**_
+<h4><i>addr</i></h4>
 
-```
-ibft propose --addr ETH_ADDRESS
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-ibft propose --addr 0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7
-```
+    ibft propose --addr ETH_ADDRESS
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    ibft propose --addr 0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7
+
+  </TabItem>
+</Tabs>
 
 Address of the account to be voted for.
 
-***
+---
 
-_**grpc-address**_
+<h4><i>grpc-address</i></h4>
 
-```
-ibft candidates [--grpc-address GRPC_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-ibft candidates --grpc-address 127.0.0.1:10003
-```
+    ibft candidates [--grpc-address GRPC_ADDRESS]
 
-Address of the gRPC API. Default: `127.0.0.1:9632`.
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-#### ibft status flags
+    ibft candidates --grpc-address 127.0.0.1:10003
 
-_**grpc-address**_
-
-```
-ibft status [--grpc-address GRPC_ADDRESS]
-```
-
-```
-ibft status --grpc-address 127.0.0.1:10003
-```
+  </TabItem>
+</Tabs>
 
 Address of the gRPC API. Default: `127.0.0.1:9632`.
 
-#### ibft switch flags
+<h3>ibft status flags</h3>
 
-_**chain**_
+<h4><i>grpc-address</i></h4>
 
-```
-ibft switch [--chain GENESIS_FILE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-ibft switch --chain genesis.json
-```
+    ibft status [--grpc-address GRPC_ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    ibft status --grpc-address 127.0.0.1:10003
+
+  </TabItem>
+</Tabs>
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+<h3>ibft switch flags</h3>
+
+<h4><i>chain</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    ibft switch [--chain GENESIS_FILE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    ibft switch --chain genesis.json
+
+  </TabItem>
+</Tabs>
 
 Specifies the genesis file to update. Default: `test`.
 
-_**type**_
+<h4><i>type</i></h4>
 
-```
-ibft switch [--type TYPE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-ibft switch --type PoS
-```
+    ibft switch [--type TYPE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    ibft switch --type PoS
+
+  </TabItem>
+</Tabs>
 
 Specifies the IBFT type to switch. Possible values: `[PoA, PoS]`.
 
-_**deployment**_
+<h4><i>deployment</i></h4>
 
-```
-ibft switch [--deployment DEPLOYMENT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-ibft switch --deployment 100
-```
+    ibft switch [--deployment DEPLOYMENT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    ibft switch --deployment 100
+
+  </TabItem>
+</Tabs>
 
 Specifies the height of contract deployment. Only available with PoS.
 
-_**from**_
+<h4><i>from</i></h4>
 
-```
-ibft switch [--from FROM]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-ibft switch --from 200
-```
+    ibft switch [--from FROM]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    ibft switch --from 200
+
+  </TabItem>
+</Tabs>
 
 Specifies the beginning height of the fork.
 
-#### Transaction Pool Commands
+### Transaction Pool Commands
 
-| **Command**      | **Description**                                |
-| ---------------- | ---------------------------------------------- |
-| txpool status    | Returns the number of transactions in the pool |
-| txpool subscribe | Subscribes for events in the transaction pool  |
+| **Command**            | **Description**                                                                      |
+|------------------------|--------------------------------------------------------------------------------------|
+| txpool status          | Returns the number of transactions in the pool                                       |
+| txpool subscribe       | Subscribes for events in the transaction pool                                        |
 
-#### txpool status flags
+<h3>txpool status flags</h3>
 
-_**grpc-address**_
+<h4><i>grpc-address</i></h4>
 
-```
-txpool status [--grpc-address GRPC_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-txpool status --grpc-address 127.0.0.1:10003
-```
+    txpool status [--grpc-address GRPC_ADDRESS]
 
-Address of the gRPC API. Default: `127.0.0.1:9632`.
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-#### txpool subscribe flags
+    txpool status --grpc-address 127.0.0.1:10003
 
-_**grpc-address**_
-
-```
-txpool subscribe [--grpc-address GRPC_ADDRESS]
-```
-
-```
-txpool subscribe --grpc-address 127.0.0.1:10003
-```
+  </TabItem>
+</Tabs>
 
 Address of the gRPC API. Default: `127.0.0.1:9632`.
 
-***
+<h3>txpool subscribe flags</h3>
 
-_**promoted**_
+<h4><i>grpc-address</i></h4>
 
-```
-txpool subscribe [--promoted LISTEN_PROMOTED]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-txpool subscribe --promoted
-```
+    txpool subscribe [--grpc-address GRPC_ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    txpool subscribe --grpc-address 127.0.0.1:10003
+
+  </TabItem>
+</Tabs>
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+---
+
+<h4><i>promoted</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    txpool subscribe [--promoted LISTEN_PROMOTED]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    txpool subscribe --promoted
+
+  </TabItem>
+</Tabs>
 
 Subscribes for promoted tx events in the TxPool.
 
-***
+---
 
-_**dropped**_
+<h4><i>dropped</i></h4>
 
-```
-txpool subscribe [--dropped LISTEN_DROPPED]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-txpool subscribe --dropped
-```
+    txpool subscribe [--dropped LISTEN_DROPPED]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    txpool subscribe --dropped
+
+  </TabItem>
+</Tabs>
 
 Subscribes for dropped tx events in the TxPool.
 
-***
+---
 
-_**demoted**_
+<h4><i>demoted</i></h4>
 
-```
-txpool subscribe [--demoted LISTEN_DEMOTED]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-txpool subscribe --demoted
-```
+    txpool subscribe [--demoted LISTEN_DEMOTED]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    txpool subscribe --demoted
+
+  </TabItem>
+</Tabs>
 
 Subscribes for demoted tx events in the TxPool.
 
-***
+---
 
-_**added**_
+<h4><i>added</i></h4>
 
-```
-txpool subscribe [--added LISTEN_ADDED]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-txpool subscribe --added
-```
+    txpool subscribe [--added LISTEN_ADDED]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    txpool subscribe --added
+
+  </TabItem>
+</Tabs>
 
 Subscribes for added tx events to the TxPool.
 
-***
+---
 
-_**enqueued**_
+<h4><i>enqueued</i></h4>
 
-```
-txpool subscribe [--enqueued LISTEN_ENQUEUED]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-txpool subscribe --enqueued
-```
+    txpool subscribe [--enqueued LISTEN_ENQUEUED]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    txpool subscribe --enqueued
+
+  </TabItem>
+</Tabs>
 
 Subscribes for enqueued tx events in the account queues.
 
-***
+---
 
-#### Blockchain commands
+### Blockchain commands
 
-| **Command** | **Description**                                                                   |
-| ----------- | --------------------------------------------------------------------------------- |
-| status      | Returns the status of the client. The detailed response can be found below        |
-| monitor     | Subscribes to a blockchain event stream. The detailed response can be found below |
-| version     | Returns the current version of the client                                         |
+| **Command**            | **Description**                                                                     |
+|------------------------|-------------------------------------------------------------------------------------|
+| status                 | Returns the status of the client. The detailed response can be found below          |
+| monitor                | Subscribes to a blockchain event stream. The detailed response can be found below   |
+| version                | Returns the current version of the client
 
-#### status flags
+<h3>status flags</h3>
 
-_**grpc-address**_
+<h4><i>grpc-address</i></h4>
 
-```
-status [--grpc-address GRPC_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-status --grpc-address 127.0.0.1:10003
-```
+    status [--grpc-address GRPC_ADDRESS]
 
-Address of the gRPC API. Default: `127.0.0.1:9632`.
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-#### monitor flags
+    status --grpc-address 127.0.0.1:10003
 
-_**grpc-address**_
-
-```
-monitor [--grpc-address GRPC_ADDRESS]
-```
-
-```
-monitor --grpc-address 127.0.0.1:10003
-```
+  </TabItem>
+</Tabs>
 
 Address of the gRPC API. Default: `127.0.0.1:9632`.
 
-***
+<h3>monitor flags</h3>
 
-### Secrets Commands
+<h4><i>grpc-address</i></h4>
 
-| **Command**      | **Description**                                                                     |
-| ---------------- | ----------------------------------------------------------------------------------- |
-| secrets init     | Initializes the private keys to the corresponding secrets manager                   |
-| secrets generate | Generates a secrets manager configuration file which can be parsed by the kalychain |
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-#### secrets init flags
+    monitor [--grpc-address GRPC_ADDRESS]
 
-_**config**_
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-```
-secrets init [--config SECRETS_CONFIG]
-```
+    monitor --grpc-address 127.0.0.1:10003
 
-```
-secrets init --config ./secretsManagerConfig.json
-```
+  </TabItem>
+</Tabs>
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+---
+
+## Secrets Commands
+
+| **Command** | **Description**                                                                                                                                      |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| secrets init      | Initializes the private keys to the corresponding secrets manager                                                         |
+| secrets generate         | Generates a secrets manager configuration file which can be parsed by the kalychain    |
+
+### secrets init flags
+
+<h4><i>config</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    secrets init [--config SECRETS_CONFIG]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    secrets init --config ./secretsManagerConfig.json
+
+  </TabItem>
+</Tabs>
 
 Sets the path to the SecretsManager config file. Used for Hashicorp Vault. If omitted, the local FS secrets manager is used.
 
-***
+---
 
-_**data-dir**_
+<h4><i>data-dir</i></h4>
 
-```
-secrets init [--data-dir DATA_DIRECTORY]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-secrets init --data-dir ./example-dir
-```
+    secrets init [--data-dir DATA_DIRECTORY]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    secrets init --data-dir ./example-dir
+
+  </TabItem>
+</Tabs>
 
 Sets the directory for the kalychain data if the local FS is used.
 
-#### secrets generate flags
+### secrets generate flags
 
-_**dir**_
+<h4><i>dir</i></h4>
 
-```
-secrets generate [--dir DATA_DIRECTORY]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-secrets generate --dir ./example-dir
-```
+    secrets generate [--dir DATA_DIRECTORY]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    secrets generate --dir ./example-dir
+
+  </TabItem>
+</Tabs>
 
 Sets the directory for the secrets manager configuration file Default: `./secretsManagerConfig.json`
 
-***
+---
 
-_**type**_
+<h4><i>type</i></h4>
 
-```
-secrets generate [--type TYPE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-secrets generate --type hashicorp-vault
-```
+    secrets generate [--type TYPE]
 
-Specifies the type of the secrets manager \[`hashicorp-vault`]. Default: `hashicorp-vault`
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-***
+    secrets generate --type hashicorp-vault
 
-_**token**_
+  </TabItem>
+</Tabs>
 
-```
-secrets generate [--token TOKEN]
-```
+Specifies the type of the secrets manager [`hashicorp-vault`]. Default: `hashicorp-vault`
 
-```
-secrets generate --token s.zNrXa9zF9mgrdnClM7PZ19cu
-```
+---
+
+<h4><i>token</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    secrets generate [--token TOKEN]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    secrets generate --token s.zNrXa9zF9mgrdnClM7PZ19cu
+
+  </TabItem>
+</Tabs>
 
 Specifies the access token for the service
 
-***
+---
 
-_**server-url**_
+<h4><i>server-url</i></h4>
 
-```
-secrets generate [--server-url SERVER_URL]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-secrets generate --server-url http://127.0.0.1:8200
-```
+    secrets generate [--server-url SERVER_URL]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    secrets generate --server-url http://127.0.0.1:8200
+
+  </TabItem>
+</Tabs>
 
 Specifies the server URL for the service
 
-***
+---
 
-_**name**_
+<h4><i>name</i></h4>
 
-```
-secrets generate [--name NODE_NAME]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-secrets generate --name node-1
-```
+    secrets generate [--name NODE_NAME]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    secrets generate --name node-1
+
+  </TabItem>
+</Tabs>
 
 Specifies the name of the node for on-service record keeping. Default: `kalychain-node`
 
-***
+---
 
-_**namespace**_
+<h4><i>namespace</i></h4>
 
-```
-secrets generate [--namespace NAMESPACE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-secrets generate --namespace my-namespace
-```
+    secrets generate [--namespace NAMESPACE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    secrets generate --namespace my-namespace
+
+  </TabItem>
+</Tabs>
 
 Specifies the namespace used for the Hashicorp Vault secrets manager. Default: `admin`
 
-***
+---
 
-### Responses
+## Responses
 
-#### Status Response
+### Status Response
 
 The response object is defined using Protocol Buffers.
-
-```go
+````go title="minimal/proto/system.proto"
 message ServerStatus {
     int64 network = 1;
     
@@ -1357,11 +1812,10 @@ message ServerStatus {
         string hash = 2;
     }
 }
-```
+````
 
-#### Monitor Response
-
-```go
+### Monitor Response
+````go title="minimal/proto/system.proto"
 message BlockchainEvent {
     // The "repeated" keyword indicates an array
     repeated Header added = 1;
@@ -1372,273 +1826,361 @@ message BlockchainEvent {
         string hash = 2;
     }
 }
-```
+````
 
-### Utilities
+## Utilities
 
-#### loadbot flags
+### loadbot flags
 
-_**tps**_
+<h4><i>tps</i></h4>
 
-```
-loadbot [--tps NUMBER_OF_TXNS_PER_SECOND]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --tps 3888
-```
+    loadbot [--tps NUMBER_OF_TXNS_PER_SECOND]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --tps 3888
+
+  </TabItem>
+</Tabs>
 
 The number of transactions per second to send. Default: `100`.
 
-***
+---
 
-_**mode**_
+<h4><i>mode</i></h4>
 
-```
-loadbot [--mode MODE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --mode transfer
-```
+    loadbot [--mode MODE]
 
-Sets the loadbot run mode \[`transfer`, `deploy`]. Default: `transfer`.
+  </TabItem>
+  <TabItem value="example" label="Example">
 
-***
+    loadbot --mode transfer
 
-_**chain-id**_
+  </TabItem>
+</Tabs>
 
-```
-loadbot [--chain-id CHAIN_ID]
-```
+Sets the loadbot run mode [`transfer`, `deploy`]. Default: `transfer`.
 
-```
-loadbot --chain-id 3888
-```
+---
+
+<h4><i>chain-id</i></h4>
+
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
+
+    loadbot [--chain-id CHAIN_ID]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --chain-id 3888
+
+  </TabItem>
+</Tabs>
 
 Sets the network chain ID for transactions. Default: `3888`.
 
-***
+---
 
-_**gas-price**_
+<h4><i>gas-price</i></h4>
 
-```
-loadbot [--gas-price GAS_PRICE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --gas-price 10000
-```
+    loadbot [--gas-price GAS_PRICE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --gas-price 10000
+
+  </TabItem>
+</Tabs>
 
 The gas price that should be used for the transactions. If omitted, the average gas price is fetched from the network.
 
-***
+---
 
-_**gas-limit**_
+<h4><i>gas-limit</i></h4>
 
-```
-loadbot [--gas-limit GAS_LIMIT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --gas-limit 10000
-```
+    loadbot [--gas-limit GAS_LIMIT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --gas-limit 10000
+
+  </TabItem>
+</Tabs>
 
 The gas limit that should be used for the transactions. If omitted, the gas limit is estimated before starting the loadbot.
 
-***
+---
 
-_**grpc-address**_
+<h4><i>grpc-address</i></h4>
 
-```
-loadbot --grpc-address GRPC_ADDRESS
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --grpc-address 127.0.0.1:9645
-```
+    loadbot --grpc-address GRPC_ADDRESS
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --grpc-address 127.0.0.1:9645
+
+  </TabItem>
+</Tabs>
 
 The GRPC endpoint used to send transactions
 
-***
+---
 
-_**detailed**_
+<h4><i>detailed</i></h4>
 
-```
-loadbot [--detailed DETAILED]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --detailed
-```
+    loadbot [--detailed DETAILED]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --detailed
+
+  </TabItem>
+</Tabs>
 
 Flag indicating if the error logs should be shown. Default: `false`.
 
-***
+---
 
-_**contract**_
+<h4><i>contract</i></h4>
 
-```
-loadbot [--contract CONTRACT_PATH]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --contract ./myContract.json
-```
+    loadbot [--contract CONTRACT_PATH]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --contract ./myContract.json
+
+  </TabItem>
+</Tabs>
 
 The path to the contract JSON artifact containing the bytecode. If omitted, a default contract is used.
 
-***
+---
 
-_**sender**_
+<h4><i>sender</i></h4>
 
-```
-loadbot [--sender ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --sender 0x1010101010101010101010101010101010101020
-```
+    loadbot [--sender ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --sender 0x1010101010101010101010101010101010101020
+
+  </TabItem>
+</Tabs>
 
 Address of the sender account.
 
-***
+---
 
-_**receiver**_
+<h4><i>receiver</i></h4>
 
-```
-loadbot [--receiver ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --receiver 0x1010101010101010101010101010101010101000
-```
+    loadbot [--receiver ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --receiver 0x1010101010101010101010101010101010101000
+
+  </TabItem>
+</Tabs>
 
 Address of the receiver account.
 
-***
+---
 
-_**jsonrpc**_
+<h4><i>jsonrpc</i></h4>
 
-```
-loadbot [--jsonrpc ENDPOINT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --jsonrpc http://127.0.0.1:8545
-```
+    loadbot [--jsonrpc ENDPOINT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --jsonrpc http://127.0.0.1:8545
+
+  </TabItem>
+</Tabs>
 
 A JSON RPC endpoint used to send transactions.
 
-***
+---
 
-_**count**_
+<h4><i>count</i></h4>
 
-```
-loadbot [--count COUNT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --count 100
-```
+    loadbot [--count COUNT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --count 100
+
+  </TabItem>
+</Tabs>
 
 The total number of transactions to send. Default: `1000`.
 
-***
+---
 
-_**value**_
+<h4><i>value</i></h4>
 
-```
-loadbot [--value VALUE]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --value 10000000000000000
-```
+    loadbot [--value VALUE]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --value 10000000000000000
+
+  </TabItem>
+</Tabs>
 
 The value to send in each transaction.
 
-***
+---
 
-_**max-conns**_
+<h4><i>max-conns</i></h4>
 
-```
-loadbot [--max-conns MAX_CONNECTIONS_COUNT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-loadbot --max-conns 1000
-```
+    loadbot [--max-conns MAX_CONNECTIONS_COUNT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    loadbot --max-conns 1000
+
+  </TabItem>
+</Tabs>
 
 Sets the maximum no.of connections allowed per host. Default: `2*tps`.
 
-***
+---
 
-#### backup flags
+### backup flags
 
-_**grpc-address**_
+<h4><i>grpc-address</i></h4>
 
-```
-backup [--grpc-address GRPC_ADDRESS]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-backup --grpc-address 127.0.0.1:9632
-```
+    backup [--grpc-address GRPC_ADDRESS]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    backup --grpc-address 127.0.0.1:9632
+
+  </TabItem>
+</Tabs>
 
 Address of the gRPC API. Default: `127.0.0.1:9632`.
 
-***
+---
 
-_**out**_
+<h4><i>out</i></h4>
 
-```
-backup [--out OUT]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-backup --out backup.dat
-```
+    backup [--out OUT]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    backup --out backup.dat
+
+  </TabItem>
+</Tabs>
 
 Path of archive file to save.
 
-***
+---
 
-_**from**_
+<h4><i>from</i></h4>
 
-```
-from [--from FROM]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-backup --from 0x0
-```
+    from [--from FROM]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    backup --from 0x0
+
+  </TabItem>
+</Tabs>
 
 The beginning height of blocks in archive. Default: 0.
 
-***
+---
 
-_**to**_
+<h4><i>to</i></h4>
 
-```
-to [--to TO]
-```
+<Tabs>
+  <TabItem value="syntax" label="Syntax" default>
 
-```
-backup --to 0x2710
-```
+    to [--to TO]
+
+  </TabItem>
+  <TabItem value="example" label="Example">
+
+    backup --to 0x2710
+
+  </TabItem>
+</Tabs>
 
 The end height of blocks in archive.
 
-***
+---
 
-### Genesis Template
-
+## Genesis Template
 The genesis file should be used to set the initial state of the blockchain (ex. if some accounts should have a starting balance).
 
-The following _./genesis.json_ file is generated:
-
-```json
+The following *./genesis.json* file is generated:
+````json
 {
     "name": "example",
     "genesis": {
@@ -1658,17 +2200,16 @@ The following _./genesis.json_ file is generated:
     },
     "bootnodes": []
 }
-```
+````
 
-#### Data Directory
+### Data Directory
 
-When executing the _data-dir_ flag, a **test-chain** folder is generated. The folder structure consists of the following sub-folders:
-
+When executing the *data-dir* flag, a **test-chain** folder is generated.
+The folder structure consists of the following sub-folders:
 * **blockchain** - Stores the LevelDB for blockchain objects
 * **trie** - Stores the LevelDB for the Merkle tries
 * **keystore** - Stores private keys for the client. This includes the libp2p private key and the sealing/validator private key
 * **consensus** - Stores any consensus information that the client might need while working
 
-### Resources
-
-* [**Protocol Buffers**](https://developers.google.com/protocol-buffers)
+## Resources
+* **[Protocol Buffers](https://developers.google.com/protocol-buffers)**

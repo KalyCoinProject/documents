@@ -1,16 +1,19 @@
-# Other modules
+---
+id: other-modules 
+title: Other modules
+---
 
-### Crypto
+## Crypto
 
 The **Crypto** module contains crypto utility functions.
 
-### Chain
+## Chain
 
 The **Chain** module contains chain parameters (active forks, consensus engine, etc.)
 
 * **chains** - Predefined chain configurations (mainnet, goerli, ibft)
 
-### Helper
+## Helper
 
 The **Helper** module contains helper packages.
 
@@ -21,6 +24,6 @@ The **Helper** module contains helper packages.
 * **keccak** - Keccak functions
 * **rlputil** - Rlp encoding/decoding helper function
 
-### Command
+## Command
 
 The **Command** module contains interfaces for CLI commands.

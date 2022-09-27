@@ -1,26 +1,29 @@
-# Installation
+---
+id: installation
+title: Installation
+---
 
 Please refer to the installation method more applicable to you.
 
 Our recommendation is to use the pre-built releases and verify the provided checksums.
 
-### Pre-built releases
+## Pre-built releases
 
 Please refer to the [GitHub Releases](https://github.com/kalycoinproject/kalychain/releases) page for a list of releases.
 
 Kalychain comes with cross-compiled AMD64/ARM64 binaries for Darwin and Linux.
 
-***
+--- 
 
-### Docker image
+## Docker image
 
 Official Docker images are hosted under the [hub.docker.com registry](https://hub.docker.com/r/kalychainlab/kalychain).
 
 `docker pull kalychainlab/kalychain:latest`
 
-***
+---
 
-### Building from source
+## Building from source
 
 Prior to using `go install` make sure that you have Go `>=1.16` installed and properly configured.
 
@@ -33,9 +36,9 @@ go build main.go -o kalychain
 sudo mv kalychain /usr/local/bin
 ```
 
-***
+---
 
-### Using `go install`
+## Using `go install`
 
 Prior to using `go install` make sure that you have Go `>=1.16` installed and properly configured.
 

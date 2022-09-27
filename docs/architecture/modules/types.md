@@ -1,6 +1,9 @@
-# Types
+---
+id: types 
+title: Types
+---
 
-### Overview
+## Overview
 
 The **Types** module implements core object types, such as:
 
@@ -9,16 +12,19 @@ The **Types** module implements core object types, such as:
 * **Header**
 * lots of helper functions
 
-### RLP Encoding / Decoding
+## RLP Encoding / Decoding
 
-Unlike clients such as GETH, the kalychain doesn't use reflection for the encoding.\
-The preference was to not use reflection because it introduces new problems, such as performance degradation, and harder scaling.
+Unlike clients such as GETH, the kalychain doesn't use reflection for the encoding.<br />
+The preference was to not use reflection because it introduces new problems, such as performance
+degradation, and harder scaling.
 
 The **Types** module provides an easy-to-use interface for RLP marshaling and unmarshalling, using the FastRLP package.
 
-Marshaling is done through the _MarshalRLPWith_ and _MarshalRLPTo_ methods. The analogous methods exist for unmarshalling.
+Marshaling is done through the *MarshalRLPWith* and *MarshalRLPTo* methods. The analogous methods exist for
+unmarshalling.
 
-By manually defining these methods, the kalychain doesn't need to use reflection. In _rlp\_marshal.go_, you can find methods for marshaling:
+By manually defining these methods, the kalychain doesn't need to use reflection. In *rlp_marshal.go*, you can find
+methods for marshaling:
 
 * **Bodies**
 * **Blocks**

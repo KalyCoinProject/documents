@@ -44,7 +44,7 @@
   * [Propose a new feature](docs/community/propose-new-feature.md)
   * [Report an issue](docs/community/report-bug.md)
 * [Docs](docs/README.md)
-  * [concepts](docs/concepts/README.md)
+  * [Concepts](docs/concepts/README.md)
     * [State in Ethereum](docs/concepts/ethereum-state.md)
   * [How-tos](docs/how-tos/README.md)
     * [How to set up and use Proof of Stake (PoS)](docs/how-tos/howto-stake-unstake.md)

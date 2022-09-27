@@ -1,22 +1,25 @@
-# Network stress testing
+---
+id: stress-testing
+title: Network stress testing
+---
 
-### Prerequisites
+## Prerequisites
 
 This guide assumes that:
 
-* You have a working kalychain network up and running
-* Both your JSON-RPC and GRPC endpoints are reachable
+- You have a working kalychain network up and running
+- Both your JSON-RPC and GRPC endpoints are reachable
 
-### Overview
+## Overview
 
 The kalychain Loadbot is a helper utility that is meant to stress test a kalychain network.
 
 Currently, it supports 2 modes:
 
-* `transfer` - mode that does stress testing using fund-transfer transactions. **\[Default]**.
-* `deploy` - mode that deploys specified smart contracts with each transaction.
+- `transfer` - mode that does stress testing using fund-transfer transactions. **[Default]**.
+- `deploy` - mode that deploys specified smart contracts with each transaction.
 
-#### Transfer Mode
+### Transfer Mode
 
 The transfer mode assumes that there is a sender account that has initial funds to conduct the loadbot run.
 
@@ -27,29 +30,28 @@ The sender's account address and private key need to be set in the environment v
 export LOADBOT_0x9A2E59d06899a383ef47C1Ec265317986D026055=154c4bc0cca942d8a0b49ece04d95c872d8f53d34b8f2ac76253a3700e4f1151
 ```
 
-#### Deploy Mode
+### Deploy Mode
 
-The deploy mode conducts contract deployment with each new transaction in the loadbot run. The contract being deployed can be specified using [specific flags](../get-started/cli-commands/#loadbot-flags), or if the contract path is omitted, a default `Greeter.sol` [contract](https://github.com/nomiclabs/hardhat/blob/master/packages/hardhat-core/sample-projects/basic/contracts/Greeter.sol) is used instead.
+The deploy mode conducts contract deployment with each new transaction in the loadbot run.
+The contract being deployed can be specified using [specific flags](/docs/get-started/cli-commands#loadbot-flags), or if the contract path is omitted, a default 
+`Greeter.sol` [contract](https://github.com/nomiclabs/hardhat/blob/master/packages/hardhat-core/sample-projects/basic/contracts/Greeter.sol) is used instead.
 
-#### Terminology
+### Terminology
 
 This section covers some basic terminology regarding the loadbot configuration.
 
-* **count** - The number of transactions to be submitted in the specified mode
-* **tps** - The number of transactions that should be submitted to the node per second
+- **count** - The number of transactions to be submitted in the specified mode
+- **tps** - The number of transactions that should be submitted to the node per second
 
-### Start the loadbot
+## Start the loadbot
 
-#### Transfer CASE
-
+### Transfer CASE
 As an example, here is a valid command you can use to run the loadbot using two premined accounts:
-
 ```bash
 kalychain loadbot --jsonrpc http://127.0.0.1:8545 --grpc-address 127.0.0.1:9632 --chain-id 568 --gas-price 100000000000 --sender 0x0Ea680527b44D598804c4a85C5d6695d2dd1Ef51 --receiver 0x7680d9649A1F09754e5Be58ed7d49554e82dAB03 --count 5000 --value 0x100 --tps 300
 ```
 
 You should get a result similar to this on your terminal :
-
 ```bash
 =====[LOADBOT RUN]=====
 
@@ -81,16 +83,13 @@ Block #3921 = 558 txns
 Block #3922 = 129 txns
 ```
 
-#### Deploy CASE
-
+### Deploy CASE
 As an example, here is a valid command you can use to run the loadbot using two premined accounts:
-
 ```bash
 kalychain loadbot --mode deploy ---jsonrpc http://127.0.0.1:8545 --grpc-address 127.0.0.1:9632 --chain-id 568 --gas-price 100000000000 --sender 0x0Ea680527b44D598804c4a85C5d6695d2dd1Ef51 --receiver 0x7680d9649A1F09754e5Be58ed7d49554e82dAB03 --count 200 --value 0x100 --tps 10
 ```
 
 You should get a result similar to this on your terminal :
-
 ```bash
 =====[LOADBOT RUN]=====
 

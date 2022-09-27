@@ -1,29 +1,31 @@
-# State
+---
+id: state 
+title: State
+---
 
-To truly understand how **State** works, you must understand some basic Ethereum concepts.\
+To truly understand how **State** works, you must understand some basic Ethereum concepts.<br />
 
+We highly recommend reading the **[State in Ethereum guide](/docs/concepts/ethereum-state)**.
 
-We highly recommend reading the [**State in Ethereum guide**](../../concepts/ethereum-state/).
-
-### Overview
+## Overview
 
 Now that we've familiarized ourselves with basic Ethereum concepts, the next overview should be easy.
 
-We mentioned that the **World state trie** has all the Ethereum accounts that exist.\
+We mentioned that the **World state trie** has all the Ethereum accounts that exist. <br />
 These accounts are the leaves of the Merkle trie. Each leaf has encoded **Account State** information.
 
-This enables the kalychain to get a specific Merkle trie, for a specific point in time.\
+This enables the kalychain to get a specific Merkle trie, for a specific point in time. <br />
 For example, we can get the hash of the state at block 10.
 
-The Merkle trie, at any point in time, is called a _**Snapshot**_.
+The Merkle trie, at any point in time, is called a ***Snapshot***.
 
-We can have _**Snapshots**_ for the **state trie**, or for the **storage trie** - they are basically the same.\
+We can have ***Snapshots*** for the **state trie**, or for the **storage trie** - they are basically the same. <br />
 The only difference is in what the leaves represent:
 
 * In the case of the storage trie, the leaves contain an arbitrary state, which we cannot process or know what's in there
 * In the case of the state trie, the leaves represent accounts
 
-```go
+````go title="state/state.go
 type State interface {
     // Gets a snapshot for a specific hash
 	NewSnapshotAt(types.Hash) (Snapshot, error)
@@ -34,11 +36,11 @@ type State interface {
 	// Gets the codeHash
 	GetCode(hash types.Hash) ([]byte, bool)
 }
-```
+````
 
 The **Snapshot** interface is defined as such:
 
-```go
+````go title="state/state.go
 type Snapshot interface {
     // Gets a specific value for a leaf
 	Get(k []byte) ([]byte, bool)
@@ -46,11 +48,11 @@ type Snapshot interface {
 	// Commits new information
 	Commit(objs []*Object) (Snapshot, []byte)
 }
-```
+````
 
-The information that can be committed is defined by the _Object struct_:
+The information that can be committed is defined by the *Object struct*:
 
-```go
+````go title="state/state.go
 // Object is the serialization of the radix object
 type Object struct {
 	Address  types.Address
@@ -65,20 +67,22 @@ type Object struct {
 
 	Storage []*StorageObject
 }
-```
+````
 
-The implementation for the Merkle trie is in the _state/immutable-trie_ folder.\
-_state/immutable-trie/state.go_ implements the **State** interface.
+The implementation for the Merkle trie is in the *state/immutable-trie* folder. <br/>
+*state/immutable-trie/state.go* implements the **State** interface.
 
-_state/immutable-trie/trie.go_ is the main Merkle trie object. It represents an optimized version of the Merkle trie, which reuses as much memory as possible.
+*state/immutable-trie/trie.go* is the main Merkle trie object. It represents an optimized version of the Merkle trie,
+which reuses as much memory as possible.
 
-### Executor
+## Executor
 
-_state/executor.go_ includes all the information needed for the kalychain to decide how a block changes the current state. The implementation of _ProcessBlock_ is located here.
+*state/executor.go* includes all the information needed for the kalychain to decide how a block changes the current
+state. The implementation of *ProcessBlock* is located here.
 
-The _apply_ method does the actual state transition. The executor calls the EVM.
+The *apply* method does the actual state transition. The executor calls the EVM.
 
-```go
+````go title="state/executor.go"
 func (t *Transition) apply(msg *types.Transaction) ([]byte, uint64, bool, error) {
 	// check if there is enough gas in the pool
 	if err := t.subGasPool(msg.Gas); err != nil {
@@ -143,15 +147,16 @@ func (t *Transition) apply(msg *types.Transaction) ([]byte, uint64, bool, error)
 
 	return returnValue, gasUsed, subErr != nil, nil
 }
-```
+````
 
-### Runtime
+## Runtime
 
-When a state transition is executed, the main module that executes the state transition is the EVM (located in state/runtime/evm).
+When a state transition is executed, the main module that executes the state transition is the EVM (located in
+state/runtime/evm).
 
 The **dispatch table** does a match between the **opcode** and the instruction.
 
-```go
+````go title="state/runtime/evm/dispatch_table.go"
 func init() {
 	// unsigned arithmetic operations
 	register(STOP, handler{opStop, 0, 0})
@@ -171,14 +176,15 @@ func init() {
 	register(JUMPI, handler{opJumpi, 2, 10})
 	register(JUMPDEST, handler{opJumpDest, 0, 1})
 }
-```
+````
 
-The core logic that powers the EVM is the _Run_ loop.\
+The core logic that powers the EVM is the *Run* loop. <br />
 
+This is the main entry point for the EVM. It does a loop and checks the current opcode, fetches the instruction, checks
+if it can be executed, consumes gas and executes the instruction until it either fails or stops.
 
-This is the main entry point for the EVM. It does a loop and checks the current opcode, fetches the instruction, checks if it can be executed, consumes gas and executes the instruction until it either fails or stops.
+````go title="state/runtime/evm/state.go"
 
-```go
 // Run executes the virtual machine
 func (c *state) Run() ([]byte, error) {
 	var vmerr error
@@ -230,4 +236,4 @@ func (c *state) Run() ([]byte, error) {
 	
 	return c.ret, vmerr
 }
-```
+````

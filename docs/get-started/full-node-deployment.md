@@ -1,25 +1,29 @@
-# Full Node
+---
+id: full-node-deployment
+title: Full Node
+---
+
 
 Full node deployment of the Kalychain blockchain.
 
-### Requirements
+## Requirements
 
 * vCPUs >= 4
 * Memory: at least 8GB
 * Disk space
-  * at least 200GB for the data directory ( recommend SSD )
-  * data disk mount to /data
+    * at least 200GB for the data directory ( recommend SSD )
+    * data disk mount to /data
 * Linux os (one of them)
-  * Ubuntu 20.04/22.04
-  * CentOS 8.0+ / Rocky Linux 8.6 / Almalinux 8.6
-  * Rocky Linux 9 / Almalinux 9
-  * Debian 10/11
+    * Ubuntu 20.04/22.04
+    * CentOS 8.0+ / Rocky Linux 8.6 / Almalinux 8.6
+    * Rocky Linux 9 / Almalinux 9
+    * Debian 10/11
 * curl or wget
 * tar
 * gzip
 * [Latest Kalychain](https://github.com/kalycoinproject/kalychain/releases)
 
-### Download && Installation
+## Download && Installation
 
 * wget:
 
@@ -35,7 +39,7 @@ $ DOGECHAIN_VERSION=$(curl -s https://api.github.com/repos/kalycoinproject/kalyc
 $ curl -OL https://github.com/kalycoinproject/kalychain/releases/download/v${DOGECHAIN_VERSION}/kalychain_${DOGECHAIN_VERSION}_linux_amd64.tar.gz
 ```
 
-### copy binary to /usr/local/bin
+## copy binary to /usr/local/bin
 
 ```shell
 $ tar -xvf kalychain_${DOGECHAIN_VERSION}_linux_amd64.tar.gz
@@ -43,13 +47,13 @@ $ cp kalychain /usr/local/bin/kalychain
 $ chmod +x /usr/local/bin/kalychain
 ```
 
-### Create system user
+## Create system user
 
 ```shell
 $ useradd -m -s /usr/sbin/nologin -d /var/lib/kalychain kalychain
 ```
 
-### Create Data Directory
+## Create Data Directory
 
 ```shell
 $ mkdir -p /data/kalychain
@@ -59,7 +63,7 @@ $ chown -R kalychain:kalychain /data/kalychain
 $ chown -R kalychain:kalychain /etc/kalychain
 ```
 
-### Copy genesis.json to etc directory
+## Copy genesis.json to etc directory
 
 ```shell
 {
@@ -162,7 +166,7 @@ $ chown -R kalychain:kalychain /etc/kalychain
 }
 ```
 
-### Create systemd service
+## Create systemd service
 
 ```shell
 $ tee /etc/systemd/system/kalychain.service <<EOF
@@ -207,6 +211,7 @@ ExecStart=/usr/local/bin/kalychain server \
     --max-outbound-peers=16
 
 EOF
+
 ```
 
 > You need to append set `--nat` flag of `ExecStart` command if you’re in NAT network or gateway.
@@ -216,9 +221,10 @@ EOF
 ExecStart= ......
     --max-outbound-peers=16 \
     --nat=XXX.XXX.XXX.XXX:1478
+
 ```
 
-#### Start service
+### Start service
 
 ```shell
 $ systemctl daemon-reload
@@ -226,13 +232,13 @@ $ systemctl enable kalychain
 $ systemctl start kalychain
 ```
 
-#### Check service status
+### Check service status
 
 ```shell
 $ systemctl status kalychain
 ```
 
-#### Check service logs
+### Check service logs
 
 ```shell
 $ journalctl -u kalychain

@@ -1,15 +1,18 @@
-# Sealer
+---
+id: sealer
+title: Sealer
+---
 
-### Overview
+## Overview
 
-The **Sealer** is an entity that gathers the transactions, and creates a new block.\
+The **Sealer** is an entity that gathers the transactions, and creates a new block.<br />
 Then, that block is sent to the **Consensus** module to seal it.
 
 The final sealing logic is located within the **Consensus** module.
 
-### Run Method
+## Run Method
 
-```go
+````go title="sealer/sealer.go"
 func (s *Sealer) run(ctx context.Context) {
 	sub := s.blockchain.SubscribeEvents()
 	eventCh := sub.GetEventCh()
@@ -46,13 +49,14 @@ func (s *Sealer) run(ctx context.Context) {
 		}
 	}
 }
-```
+````
 
-:::caution Work in progress The **Sealer** and the **Consensus** modules will be combined into a single entity in the near future.
+:::caution Work in progress
+The **Sealer** and the **Consensus** modules will be combined into a single entity in the near future.
 
 The new module will incorporate modular logic for different kinds of consensus mechanisms, which require different sealing implementations:
-
 * **PoS** (Proof of Stake)
 * **PoA** (Proof of Authority)
 
-Currently, the **Sealer** and the **Consensus** modules work with PoW (Proof of Work). :::
+Currently, the **Sealer** and the **Consensus** modules work with PoW (Proof of Work).
+:::

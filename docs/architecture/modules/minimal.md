@@ -1,24 +1,26 @@
-# Minimal
+---
+id: minimal
+title: Minimal
+---
 
-### Overview
+## Overview
 
-As mentioned before, Kalychain is a set of different modules, all connected to each other.\
+As mentioned before, Kalychain is a set of different modules, all connected to each other.<br />
 The **Blockchain** is connected to the **State**, or for example, **Synchronization**, which pipes new blocks into the **Blockchain**.
 
-**Minimal** is the cornerstone for these inter-connected modules.\
+**Minimal** is the cornerstone for these inter-connected modules. <br />
 It acts as a central hub for all the services that run on the kalychain.
 
-### Startup Magic
+## Startup Magic
 
 Among other things, Minimal is responsible for:
-
 * Setting up data directories
 * Creating a keystore for libp2p communication
 * Creating storage
 * Setting up consensus
 * Setting up the blockchain object with GRPC, JSON RPC, and Synchronization
 
-```go
+````go title="minimal/server.go"
 func NewServer(logger hclog.Logger, config *Config) (*Server, error) {
 	m := &Server{
 		logger: logger,
@@ -106,4 +108,4 @@ func NewServer(logger hclog.Logger, config *Config) (*Server, error) {
 	m.libp2pServer.Serve()
 	return m, nil
 }
-```
+````
