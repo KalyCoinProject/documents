@@ -19,7 +19,7 @@ Refer to [Installation](installation/) to install kalychain.
 
 ### Overview
 
-<figure><img src="../../.gitbook/assets/imagen (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/imagen (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 In this guide, our goal is to establish a working `kalychain` blockchain network working with [IBFT consensus protocol](https://github.com/ethereum/EIPs/issues/650). The blockchain network will consist of 4 nodes of whom all 4 are validator nodes, and as such are eligible for both proposing block, and validating blocks that came from other proposers. All 4 nodes will run on the same machine, as the idea of this guide is to give you a fully functional IBFT cluster in the least amount of time.
 

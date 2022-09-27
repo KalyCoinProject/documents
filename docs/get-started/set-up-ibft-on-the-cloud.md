@@ -23,7 +23,7 @@ As the only part of the `kalychain` that needs to be exposed to other VMs is the
 
 ### Overview
 
-<figure><img src="../../.gitbook/assets/imagen.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/imagen (1).png" alt=""><figcaption></figcaption></figure>
 
 In this guide, our goal is to establish a working `kalychain` blockchain network working with [IBFT consensus protocol](https://github.com/ethereum/EIPs/issues/650). The blockchain network will consist of 4 nodes of whom all 4 are validator nodes, and as such are eligible for both proposing block, and validating blocks that came from other proposers. Each of the 4 nodes will run on their own VM, as the idea of this guide is to give you a fully functional kalychain network while keeping the validator keys private to ensure a trustless network setup.
 
