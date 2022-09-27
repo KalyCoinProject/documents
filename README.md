@@ -1,6 +1,6 @@
 ## Kalychain Docs
 
-[![Github Actions](https://github.com/kalycoinproject/documents/actions/workflows/pages.yml/badge.svg)](https://github.com/kalycoinproject/documents/actions/workflows/pages.yml)
+[![Github Actions](https://github.com/KalyCoinProject/documents/actions/workflows/webpages.yml/badge.svg)](https://github.com/KalyCoinProject/documents/actions/workflows/webpages.yml)
 
 This is the main repo for contributing to the Kalychain documentation.
 
