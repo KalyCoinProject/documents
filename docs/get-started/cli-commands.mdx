@@ -1,0 +1,1674 @@
+# CLI Commands
+
+import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
+
+This section details the present commands, command flags in the kalychain, and how they're used.
+
+:::tip JSON output support
+
+The `--json` flag is supported on some commands. This flag instructs the command to print the output in JSON format
+
+:::
+
+### Reference Version
+
+**`v1.1.3`**
+
+### Startup Commands
+
+| **Command** | **Description**                                                                                                                                                 |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| server      | The default command that starts the blockchain client, by bootstrapping all modules together                                                                    |
+| genesis     | Generates a _genesis.json_ file, which is used to set a predefined chain state before starting the client. The structure of the genesis file is described below |
+
+#### server flags
+
+_**seal**_
+
+```
+server [--seal SHOULD_SEAL]
+```
+
+```
+server --seal
+server --seal=false
+```
+
+Sets the flag indicating that the client should seal blocks. Default: `true`.
+
+Turn it off by explicitly setting it `false`.
+
+***
+
+_**data-dir**_
+
+```
+server [--data-dir DATA_DIRECTORY]
+```
+
+```
+server --data-dir ./example-dir
+```
+
+Used to specify the data directory used for storing kalycoinproject Kalychain client data. Default: `./kalychain-chain`.
+
+***
+
+_**jsonrpc**_
+
+```
+server [--jsonrpc JSONRPC_ADDRESS]
+```
+
+```
+server --jsonrpc 127.0.0.1:10000
+```
+
+Sets the address and port for the JSON-RPC service `address:port`.\
+If only port is defined `:10001` it will bind to all interfaces `0.0.0.0:10001`.\
+If omitted the service will bind to the default `address:port`.\
+Default address: `0.0.0.0:8545`.
+
+***
+
+_**json-rpc-batch-request-limit**_
+
+```
+server [--json-rpc-batch-request-limit BATCH_REQUST_LIMIT]
+```
+
+```
+server --json-rpc-batch-request-limit 5
+```
+
+Sets the max length to be considered when handling json-rpc batch requests. Default `1`.
+
+Turn it off by setting `0`.
+
+***
+
+_**json-rpc-block-range-limit**_
+
+```
+server [--json-rpc-block-range-limit BLOCK_RANGE_LIMIT]
+```
+
+```
+server --json-rpc-block-range-limit 100
+```
+
+Sets the max block range to be considered when executing json-rpc requests that consider fromBlock/toBlock values. Default `100`.
+
+Turn it off by setting `0`.
+
+***
+
+_**enable-ws**_
+
+```
+server [--enable-ws SHOULD_ENABLE_WEBSOCKET]
+```
+
+```
+server --enable-ws
+```
+
+Sets the flag indicating that node enable WebSocket service. Default: `false`.
+
+***
+
+_**grpc**_
+
+```
+server [--grpc-address GRPC_ADDRESS]
+```
+
+```
+server --grpc-address 127.0.0.1:9632
+```
+
+Sets the address and port for the gRPC service `address:port`. Default address: `127.0.0.1:9632`.
+
+***
+
+_**libp2p**_
+
+```
+server [--libp2p LIBP2P_ADDRESS]
+```
+
+```
+server --libp2p 127.0.0.1:1478
+```
+
+Sets the address and port for the libp2p service `address:port`. Default address: `127.0.0.1:1478`.
+
+***
+
+_**prometheus**_
+
+```
+server [--prometheus PROMETHEUS_ADDRESS]
+```
+
+```
+server --prometheus 127.0.0.1:10004
+```
+
+Sets the address and port for the prometheus server `address:port`.\
+If only port is defined `:5001` the service will bind to all interfaces `0.0.0.0:5001`.\
+If omitted the service will not be started.
+
+***
+
+_**block-gas-target**_
+
+```
+server [--block-gas-target BLOCK_GAS_TARGET]
+```
+
+```
+server --block-gas-target 10000000
+```
+
+Sets the target block gas limit for the chain. If omitted, the value of the parent block is used. Default (not enforced): `0`.
+
+A more detailed explanation on the block gas target can be found in the [TxPool section](../architecture/modules/txpool/#block-gas-target).
+
+***
+
+_**max-peers**_
+
+```
+server [--max-peers PEER_COUNT]
+```
+
+```
+server --max-peers 40
+```
+
+Sets the client's maximum peer count. Default: `40`.
+
+Peer limit should be specified either by using `max-peers` or `max-inbound/outbound-peers` flag.
+
+***
+
+_**max-inbound-peers**_
+
+```
+server [--max-inbound-peers PEER_COUNT]
+```
+
+```
+server --max-inbound-peers 32
+```
+
+Sets the client's maximum inbound peer count. If `max-peers` is set, max-inbound-peer limit is calculated using the following formulae.
+
+`max-inbound-peer = InboundRatio * max-peers`, where `InboundRatio` is `0.8`.
+
+***
+
+_**max-outbound-peers**_
+
+```
+server [--max-outbound-peers PEER_COUNT]
+```
+
+```
+server --max-outbound-peers 8
+```
+
+Sets the client's maximum outbound peer count. If `max-peers` is set, max-outbound-peer count is calculated using the following formulae.
+
+`max-outbound-peer = OutboundRatio * max-peers`, where `OutboundRatio` is `0.2`.
+
+***
+
+_**log-level**_
+
+```
+server [--log-level LOG_LEVEL]
+```
+
+```
+server --log-level DEBUG
+```
+
+Sets the log level for console output. Default: `INFO`.
+
+***
+
+_**chain**_
+
+```
+server [--chain GENESIS_FILE]
+```
+
+```
+server --chain /home/ubuntu/genesis.json
+```
+
+Specifies the genesis file used for starting the chain. Default: `./genesis.json`.
+
+***
+
+_**join**_
+
+```
+server [--join JOIN_ADDRESS]
+```
+
+```
+server --join /ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
+```
+
+Specifies the address of the peer that should be joined.
+
+***
+
+_**nat**_
+
+```
+server [--nat NAT_ADDRESS[:PORT]]
+```
+
+```
+server --nat 192.0.2.1
+server --nat 192.0.2.1:22222
+```
+
+Sets the external address (address:port), as can be seen by peers.
+
+***
+
+_**dns**_
+
+```
+server [--dns DNS_ADDRESS]
+```
+
+```
+server --dns dns4/example.io 
+```
+
+Sets the host DNS address. This can be used to advertise an external DNS. Supports `dns`,`dns4`,`dns6`.
+
+***
+
+_**price-limit**_
+
+```
+server [--price-limit PRICE_LIMIT]
+```
+
+```
+server --price-limit 250000000000
+```
+
+Sets minimum gas price limit to enforce for acceptance into the pool. Default: `0`.
+
+***
+
+_**max-slots**_
+
+```
+server [--max-slots MAX_SLOTS]
+```
+
+```
+server --max-slots 4096
+```
+
+Sets maximum slots in the pool. Default: `4096`.
+
+***
+
+_**config**_
+
+```
+server [--config CLI_CONFIG_PATH]
+```
+
+```
+server --config ./myConfig.json
+```
+
+Specifies the path to the CLI config. Supports `.json` and `.hcl`.
+
+***
+
+_**secrets-config**_
+
+```
+server [--secrets-config SECRETS_CONFIG]
+```
+
+```
+server --secrets-config ./secretsManagerConfig.json
+```
+
+Sets the path to the SecretsManager config file. Used for Hashicorp Vault and GCP SSM. If omitted, the local FS secrets manager is used.
+
+***
+
+_**dev**_
+
+```
+server [--dev DEV_MODE]
+```
+
+```
+server --dev
+```
+
+Sets the client to dev mode. Default: `false`.
+
+***
+
+_**dev-interval**_
+
+```
+server [--dev-interval DEV_INTERVAL]
+```
+
+```
+server --dev-interval 1
+```
+
+Sets the client's dev notification interval in seconds. Default: `0`.
+
+***
+
+_**no-discover**_
+
+```
+server [--no-discover NO_DISCOVER]
+```
+
+```
+server --no-discover
+```
+
+Prevents the client from discovering other peers. Default: `false`.
+
+***
+
+_**restore**_
+
+```
+server [--restore RESTORE]
+```
+
+```
+server --restore backup.dat
+```
+
+Sets the path to the archive blockchain data to restore on initialization.
+
+***
+
+_**block-time**_
+
+```
+server [--block-time BLOCK_TIME]
+```
+
+```
+server --block-time 2
+```
+
+Sets minimum block time in seconds (at least `1` s). Default: `2`
+
+***
+
+_**access-control-allow-origins**_
+
+```
+server [--access-control-allow-origins ACCESS_CONTROL_ALLOW_ORIGINS]
+```
+
+```
+server --access-control-allow-origins "https://documents.doge.technology"
+```
+
+Sets the authorized domains to be able to share responses from JSON-RPC requests.\
+Add multiple flags `--access-control-allow-origins "https://example1.com" --access-control-allow-origins "https://example2.com"` to authorize multiple domains.\
+If omitted Access-Control-Allow-Origins header will be set to `*` and all domains will be authorized.
+
+***
+
+_**daemon**_
+
+```
+server [--daemon SHOULD_RUN_AS_DAEMON]
+```
+
+```
+server --daemon
+```
+
+Sets the flag indicating that the server ran as daemon. Default: `false`. Once the flag set, node would not use local secret files, but accept the private keys on the first start up.
+
+***
+
+_**log-to**_
+
+```
+server [--log-to LOG_FILE_PATH]
+```
+
+```
+server --log-to ./kalychain-testing.log
+```
+
+Sets the flag to write all logs to the file at specified location instead of writing them to console. If omitted, logs would be written to console.
+
+***
+
+_**enable-graphql**_
+
+```
+server [--enable-graphql SHOULD_ENABLE_GRAPHQL]
+```
+
+```
+server --enable-graphql
+```
+
+Sets the flag indicating that node enable graphql service. Default: `false`.
+
+***
+
+_**graphql-address**_
+
+```
+server [--graphql-address GRAPHQL_ADDRESS]
+```
+
+```
+server --graphql-address :9898
+```
+
+The GraphQL interface. Default: `127.0.0.1:9898`.
+
+***
+
+_**promote-outdate-seconds**_
+
+```
+server [--promote-outdate-seconds PROMOTE_OUTDATE_SECONDS]
+```
+
+```
+server --promote-outdate-seconds 3600
+```
+
+Account in the pool not promoted for a long time would be pruned. Default: `3600`.
+
+***
+
+_**prune-tick-seconds**_
+
+```
+server [--prune-tick-seconds PROMOTE_OUTDATE_SECONDS]
+```
+
+```
+server --prune-tick-seconds 300
+```
+
+Tick seconds for pruning account future transactions in the pool. Default: `300`. Should not be larger than `promote-outdate-seconds` flag, otherwise, unknown errors might happen.
+
+***
+
+_**leveldb.bloom-bits**_
+
+```
+server [--leveldb.bloom-bits BLOOM_BITS]
+```
+
+```
+server --leveldb.bloom-bits 4096
+```
+
+Sets the bits of leveldb bloom filters. Default: `2048`.
+
+***
+
+_**leveldb.cache-size**_
+
+```
+server [--leveldb.cache-size CACHE_MB_SIZE]
+```
+
+```
+server --leveldb.cache-size 2048
+```
+
+Sets the size of the leveldb cache in MB. Default: `1024`.
+
+***
+
+_**leveldb.handles**_
+
+```
+server [--leveldb.handles OPEN_FILES]
+```
+
+```
+server --leveldb.handles 1024
+```
+
+Sets the number of handles to leveldb open files. Default: `512`.
+
+***
+
+_**leveldb.table-size**_
+
+```
+server [--leveldb.table-size TBL_MB_SIZE]
+```
+
+```
+server --leveldb.table-size 8
+```
+
+Sets the leveldb 'sorted table' size in MB. Default: `8`.
+
+***
+
+_**leveldb.total-table-size**_
+
+```
+server [--leveldb.total-table-size TOTAL_TBL_MB_SIZE]
+```
+
+```
+server --leveldb.total-table-size 32
+```
+
+Sets limits leveldb total size of 'sorted table' for each level in MB. Default: `32`.
+
+***
+
+_**pprof**_
+
+```
+server [--pprof SHOULD_ENABLE_PPROF]
+```
+
+```
+server --pprof
+```
+
+Enables the pprof server. Default: `false`.
+
+***
+
+_**pprof-address**_
+
+```
+server [--pprof-address SHOULD_ENABLE_PPROF]
+```
+
+```
+server --pprof-address 127.0.0.1:6060
+```
+
+Sets the address and port for the pprof service. Default address: `127.0.0.1:6060`.
+
+***
+
+#### genesis flags
+
+_**dir**_
+
+```
+genesis [--dir DIRECTORY]
+```
+
+```
+genesis --dir ./genesis.json
+```
+
+Sets the directory for the kalychain genesis data. Default: `./genesis.json`.
+
+***
+
+_**name**_
+
+```
+genesis [--name NAME]
+```
+
+```
+genesis --name test-chain
+```
+
+Sets the name for the chain. Default: `kalychain`.
+
+***
+
+_**pos**_
+
+```
+genesis [--pos IS_POS]
+```
+
+```
+genesis --pos
+```
+
+Sets the flag indicating that the client should use Proof of Stake IBFT. Defaults to Proof of Authority if flag is not provided or `false`.
+
+***
+
+_**epoch-size**_
+
+```
+genesis [--epoch-size EPOCH_SIZE]
+```
+
+```
+genesis --epoch-size 50
+```
+
+Sets the epoch size for the chain. Default `100000`.
+
+***
+
+_**premine**_
+
+```
+genesis [--premine ADDRESS:VALUE]
+```
+
+```
+genesis --premine 0x3956E90e632AEbBF34DEB49b71c28A83Bc029862:1000000000000000000000
+```
+
+Sets the premined accounts and balances in the format `address:amount`. The amount can be in either decimal or hex. Default premined balance: `0x3635C9ADC5DEA00000`.
+
+***
+
+_**chain-id**_
+
+```
+genesis [--chain-id CHAIN_ID]
+```
+
+```
+genesis --chain-id 200
+```
+
+Sets the ID of the chain. Default: `3888`.
+
+***
+
+_**ibft-validators-prefix-path**_
+
+```
+genesis [--ibft-validators-prefix-path IBFT_VALIDATORS_PREFIX_PATH]
+```
+
+```
+genesis --ibft-validators-prefix-path test-chain-
+```
+
+Prefix path for validator folder directory. Needs to be present if the flag `ibft-validator` is omitted.
+
+***
+
+_**ibft-validator**_
+
+```
+genesis [--ibft-validator IBFT_VALIDATOR_LIST]
+```
+
+```
+genesis --ibft-validator 0xC12bB5d97A35c6919aC77C709d55F6aa60436900
+```
+
+Sets passed in addresses as IBFT validators. Needs to be present if the flag `ibft-validators-prefix-path` is omitted.
+
+***
+
+_**block-gas-limit**_
+
+```
+genesis [--block-gas-limit BLOCK_GAS_LIMIT]
+```
+
+```
+genesis --block-gas-limit 5000000
+```
+
+Refers to the maximum amount of gas used by all operations in a block. Default: `5242880`.
+
+***
+
+_**consensus**_
+
+```
+genesis [--consensus CONSENSUS_PROTOCOL]
+```
+
+```
+genesis --consensus ibft
+```
+
+Sets consensus protocol. Default: `pow`.
+
+***
+
+_**bootnode**_
+
+```
+genesis [--bootnode BOOTNODE_URL]
+```
+
+```
+genesis --bootnode /ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
+```
+
+Multiaddr URL for p2p discovery bootstrap. This flag can be used multiple times. Instead of an IP address, the DNS address of the bootnode can be provided.
+
+***
+
+_**bridge-owner**_
+
+```
+genesis [--bridge-owner BRIDGE_CONTRACT_OWNER]
+```
+
+```
+genesis --bridge-owner 0xeeA13dF426dcF62999B9bFf912f58E25f4f9Ba2f
+```
+
+Sets the system bridge contract owner address.
+
+***
+
+_**bridge-signer**_
+
+```
+genesis [--bridge-signer SIGNER_ACCOUNT_LIST]
+```
+
+```
+genesis --bridge-signer 0xa39b6aA2CD5139bA742f9D9cd4a72458D78d5c4E --bridge-signer 0x1b4297618913C492179C308322Aa6e66daF625D4
+```
+
+Sets the system bridge contract signer address. This flag can be used multiple times.
+
+***
+
+_**validatorset-owner**_
+
+```
+genesis [--validatorset-owner VALIDATOR_CONTRACT_OWNER]
+```
+
+```
+genesis --validatorset-owner 0xeeA13dF426dcF62999B9bFf912f58E25f4f9Ba2f
+```
+
+Sets the system ValidatorSet contract owner address.
+
+***
+
+_**vault-owner**_
+
+```
+genesis [--vault-owner VAULT_CONTRACT_OWNER]
+```
+
+```
+genesis --vault-owner 0xeeA13dF426dcF62999B9bFf912f58E25f4f9Ba2f
+```
+
+Sets the system vault contract owner address.
+
+***
+
+### Operator Commands
+
+#### Peers Commands
+
+| **Command**  | **Description**                                                                     |
+| ------------ | ----------------------------------------------------------------------------------- |
+| peers add    | Adds a new peer using their libp2p address                                          |
+| peers list   | Lists all the peers the client is connected to through libp2p                       |
+| peers status | Returns the status of a specific peer from the peers list, using the libp2p address |
+
+#### peers add flags
+
+_**addr**_
+
+```
+peers add --addr PEER_ADDRESS
+```
+
+```
+peers add --addr /ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
+```
+
+Peer's libp2p address in the multiaddr format.
+
+***
+
+_**grpc-address**_
+
+```
+peers add [--grpc-address GRPC_ADDRESS]
+```
+
+```
+peers add --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+#### peers list flags
+
+_**grpc-address**_
+
+```
+peers list [--grpc-address GRPC_ADDRESS]
+```
+
+```
+peers list --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+#### peers status flags
+
+_**peer-id**_
+
+```
+peers status --peer-id PEER_ID
+```
+
+```
+peers status --peer-id 16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
+```
+
+Libp2p node ID of a specific peer within p2p network.
+
+***
+
+_**grpc-address**_
+
+```
+peers status [--grpc-address GRPC_ADDRESS]
+```
+
+```
+peers status --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+#### IBFT Commands
+
+| **Command**     | **Description**                                                                                       |
+| --------------- | ----------------------------------------------------------------------------------------------------- |
+| ibft snapshot   | Returns the IBFT snapshot                                                                             |
+| ibft candidates | Queries the current set of proposed candidates, as well as candidates that have not been included yet |
+| ibft propose    | Proposes a new candidate to be added/removed from the validator set                                   |
+| ibft status     | Returns the overall status of the IBFT client                                                         |
+| ibft switch     | Add fork configurations into genesis.json file to switch IBFT type                                    |
+
+#### ibft snapshot flags
+
+_**number**_
+
+```
+ibft snapshot [--number BLOCK_NUMBER]
+```
+
+```
+ibft snapshot --number 100
+```
+
+The block height (number) for the snapshot.
+
+***
+
+_**grpc-address**_
+
+```
+ibft snapshot [--grpc-address GRPC_ADDRESS]
+```
+
+```
+ibft snapshot --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+#### ibft candidates flags
+
+_**grpc-address**_
+
+```
+ibft candidates [--grpc-address GRPC_ADDRESS]
+```
+
+```
+ibft candidates --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+#### ibft propose flags
+
+_**vote**_
+
+```
+ibft propose --vote VOTE
+```
+
+```
+ibft propose --vote auth
+```
+
+Proposes a change to the validator set. Possible values: `[auth, drop]`.
+
+***
+
+_**addr**_
+
+```
+ibft propose --addr ETH_ADDRESS
+```
+
+```
+ibft propose --addr 0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7
+```
+
+Address of the account to be voted for.
+
+***
+
+_**grpc-address**_
+
+```
+ibft candidates [--grpc-address GRPC_ADDRESS]
+```
+
+```
+ibft candidates --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+#### ibft status flags
+
+_**grpc-address**_
+
+```
+ibft status [--grpc-address GRPC_ADDRESS]
+```
+
+```
+ibft status --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+#### ibft switch flags
+
+_**chain**_
+
+```
+ibft switch [--chain GENESIS_FILE]
+```
+
+```
+ibft switch --chain genesis.json
+```
+
+Specifies the genesis file to update. Default: `test`.
+
+_**type**_
+
+```
+ibft switch [--type TYPE]
+```
+
+```
+ibft switch --type PoS
+```
+
+Specifies the IBFT type to switch. Possible values: `[PoA, PoS]`.
+
+_**deployment**_
+
+```
+ibft switch [--deployment DEPLOYMENT]
+```
+
+```
+ibft switch --deployment 100
+```
+
+Specifies the height of contract deployment. Only available with PoS.
+
+_**from**_
+
+```
+ibft switch [--from FROM]
+```
+
+```
+ibft switch --from 200
+```
+
+Specifies the beginning height of the fork.
+
+#### Transaction Pool Commands
+
+| **Command**      | **Description**                                |
+| ---------------- | ---------------------------------------------- |
+| txpool status    | Returns the number of transactions in the pool |
+| txpool subscribe | Subscribes for events in the transaction pool  |
+
+#### txpool status flags
+
+_**grpc-address**_
+
+```
+txpool status [--grpc-address GRPC_ADDRESS]
+```
+
+```
+txpool status --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+#### txpool subscribe flags
+
+_**grpc-address**_
+
+```
+txpool subscribe [--grpc-address GRPC_ADDRESS]
+```
+
+```
+txpool subscribe --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+***
+
+_**promoted**_
+
+```
+txpool subscribe [--promoted LISTEN_PROMOTED]
+```
+
+```
+txpool subscribe --promoted
+```
+
+Subscribes for promoted tx events in the TxPool.
+
+***
+
+_**dropped**_
+
+```
+txpool subscribe [--dropped LISTEN_DROPPED]
+```
+
+```
+txpool subscribe --dropped
+```
+
+Subscribes for dropped tx events in the TxPool.
+
+***
+
+_**demoted**_
+
+```
+txpool subscribe [--demoted LISTEN_DEMOTED]
+```
+
+```
+txpool subscribe --demoted
+```
+
+Subscribes for demoted tx events in the TxPool.
+
+***
+
+_**added**_
+
+```
+txpool subscribe [--added LISTEN_ADDED]
+```
+
+```
+txpool subscribe --added
+```
+
+Subscribes for added tx events to the TxPool.
+
+***
+
+_**enqueued**_
+
+```
+txpool subscribe [--enqueued LISTEN_ENQUEUED]
+```
+
+```
+txpool subscribe --enqueued
+```
+
+Subscribes for enqueued tx events in the account queues.
+
+***
+
+#### Blockchain commands
+
+| **Command** | **Description**                                                                   |
+| ----------- | --------------------------------------------------------------------------------- |
+| status      | Returns the status of the client. The detailed response can be found below        |
+| monitor     | Subscribes to a blockchain event stream. The detailed response can be found below |
+| version     | Returns the current version of the client                                         |
+
+#### status flags
+
+_**grpc-address**_
+
+```
+status [--grpc-address GRPC_ADDRESS]
+```
+
+```
+status --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+#### monitor flags
+
+_**grpc-address**_
+
+```
+monitor [--grpc-address GRPC_ADDRESS]
+```
+
+```
+monitor --grpc-address 127.0.0.1:10003
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+***
+
+### Secrets Commands
+
+| **Command**      | **Description**                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| secrets init     | Initializes the private keys to the corresponding secrets manager                   |
+| secrets generate | Generates a secrets manager configuration file which can be parsed by the kalychain |
+
+#### secrets init flags
+
+_**config**_
+
+```
+secrets init [--config SECRETS_CONFIG]
+```
+
+```
+secrets init --config ./secretsManagerConfig.json
+```
+
+Sets the path to the SecretsManager config file. Used for Hashicorp Vault. If omitted, the local FS secrets manager is used.
+
+***
+
+_**data-dir**_
+
+```
+secrets init [--data-dir DATA_DIRECTORY]
+```
+
+```
+secrets init --data-dir ./example-dir
+```
+
+Sets the directory for the kalychain data if the local FS is used.
+
+#### secrets generate flags
+
+_**dir**_
+
+```
+secrets generate [--dir DATA_DIRECTORY]
+```
+
+```
+secrets generate --dir ./example-dir
+```
+
+Sets the directory for the secrets manager configuration file Default: `./secretsManagerConfig.json`
+
+***
+
+_**type**_
+
+```
+secrets generate [--type TYPE]
+```
+
+```
+secrets generate --type hashicorp-vault
+```
+
+Specifies the type of the secrets manager \[`hashicorp-vault`]. Default: `hashicorp-vault`
+
+***
+
+_**token**_
+
+```
+secrets generate [--token TOKEN]
+```
+
+```
+secrets generate --token s.zNrXa9zF9mgrdnClM7PZ19cu
+```
+
+Specifies the access token for the service
+
+***
+
+_**server-url**_
+
+```
+secrets generate [--server-url SERVER_URL]
+```
+
+```
+secrets generate --server-url http://127.0.0.1:8200
+```
+
+Specifies the server URL for the service
+
+***
+
+_**name**_
+
+```
+secrets generate [--name NODE_NAME]
+```
+
+```
+secrets generate --name node-1
+```
+
+Specifies the name of the node for on-service record keeping. Default: `kalychain-node`
+
+***
+
+_**namespace**_
+
+```
+secrets generate [--namespace NAMESPACE]
+```
+
+```
+secrets generate --namespace my-namespace
+```
+
+Specifies the namespace used for the Hashicorp Vault secrets manager. Default: `admin`
+
+***
+
+### Responses
+
+#### Status Response
+
+The response object is defined using Protocol Buffers.
+
+```go
+message ServerStatus {
+    int64 network = 1;
+    
+    string genesis = 2;
+
+    Block current = 3;
+
+    string p2pAddr = 4;
+    
+    message Block {
+        int64 number = 1;
+        string hash = 2;
+    }
+}
+```
+
+#### Monitor Response
+
+```go
+message BlockchainEvent {
+    // The "repeated" keyword indicates an array
+    repeated Header added = 1;
+    repeated Header removed = 2;
+
+    message Header {
+        int64 number = 1;
+        string hash = 2;
+    }
+}
+```
+
+### Utilities
+
+#### loadbot flags
+
+_**tps**_
+
+```
+loadbot [--tps NUMBER_OF_TXNS_PER_SECOND]
+```
+
+```
+loadbot --tps 3888
+```
+
+The number of transactions per second to send. Default: `100`.
+
+***
+
+_**mode**_
+
+```
+loadbot [--mode MODE]
+```
+
+```
+loadbot --mode transfer
+```
+
+Sets the loadbot run mode \[`transfer`, `deploy`]. Default: `transfer`.
+
+***
+
+_**chain-id**_
+
+```
+loadbot [--chain-id CHAIN_ID]
+```
+
+```
+loadbot --chain-id 3888
+```
+
+Sets the network chain ID for transactions. Default: `3888`.
+
+***
+
+_**gas-price**_
+
+```
+loadbot [--gas-price GAS_PRICE]
+```
+
+```
+loadbot --gas-price 10000
+```
+
+The gas price that should be used for the transactions. If omitted, the average gas price is fetched from the network.
+
+***
+
+_**gas-limit**_
+
+```
+loadbot [--gas-limit GAS_LIMIT]
+```
+
+```
+loadbot --gas-limit 10000
+```
+
+The gas limit that should be used for the transactions. If omitted, the gas limit is estimated before starting the loadbot.
+
+***
+
+_**grpc-address**_
+
+```
+loadbot --grpc-address GRPC_ADDRESS
+```
+
+```
+loadbot --grpc-address 127.0.0.1:9645
+```
+
+The GRPC endpoint used to send transactions
+
+***
+
+_**detailed**_
+
+```
+loadbot [--detailed DETAILED]
+```
+
+```
+loadbot --detailed
+```
+
+Flag indicating if the error logs should be shown. Default: `false`.
+
+***
+
+_**contract**_
+
+```
+loadbot [--contract CONTRACT_PATH]
+```
+
+```
+loadbot --contract ./myContract.json
+```
+
+The path to the contract JSON artifact containing the bytecode. If omitted, a default contract is used.
+
+***
+
+_**sender**_
+
+```
+loadbot [--sender ADDRESS]
+```
+
+```
+loadbot --sender 0x1010101010101010101010101010101010101020
+```
+
+Address of the sender account.
+
+***
+
+_**receiver**_
+
+```
+loadbot [--receiver ADDRESS]
+```
+
+```
+loadbot --receiver 0x1010101010101010101010101010101010101000
+```
+
+Address of the receiver account.
+
+***
+
+_**jsonrpc**_
+
+```
+loadbot [--jsonrpc ENDPOINT]
+```
+
+```
+loadbot --jsonrpc http://127.0.0.1:8545
+```
+
+A JSON RPC endpoint used to send transactions.
+
+***
+
+_**count**_
+
+```
+loadbot [--count COUNT]
+```
+
+```
+loadbot --count 100
+```
+
+The total number of transactions to send. Default: `1000`.
+
+***
+
+_**value**_
+
+```
+loadbot [--value VALUE]
+```
+
+```
+loadbot --value 10000000000000000
+```
+
+The value to send in each transaction.
+
+***
+
+_**max-conns**_
+
+```
+loadbot [--max-conns MAX_CONNECTIONS_COUNT]
+```
+
+```
+loadbot --max-conns 1000
+```
+
+Sets the maximum no.of connections allowed per host. Default: `2*tps`.
+
+***
+
+#### backup flags
+
+_**grpc-address**_
+
+```
+backup [--grpc-address GRPC_ADDRESS]
+```
+
+```
+backup --grpc-address 127.0.0.1:9632
+```
+
+Address of the gRPC API. Default: `127.0.0.1:9632`.
+
+***
+
+_**out**_
+
+```
+backup [--out OUT]
+```
+
+```
+backup --out backup.dat
+```
+
+Path of archive file to save.
+
+***
+
+_**from**_
+
+```
+from [--from FROM]
+```
+
+```
+backup --from 0x0
+```
+
+The beginning height of blocks in archive. Default: 0.
+
+***
+
+_**to**_
+
+```
+to [--to TO]
+```
+
+```
+backup --to 0x2710
+```
+
+The end height of blocks in archive.
+
+***
+
+### Genesis Template
+
+The genesis file should be used to set the initial state of the blockchain (ex. if some accounts should have a starting balance).
+
+The following _./genesis.json_ file is generated:
+
+```json
+{
+    "name": "example",
+    "genesis": {
+        "nonce": "0x0000000000000000",
+        "gasLimit": "0x0000000000001388",
+        "difficulty": "0x0000000000000001",
+        "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "coinbase": "0x0000000000000000000000000000000000000000",
+        "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "params": {
+        "forks": {},
+        "chainID": 3888,
+        "engine": {
+            "pow": {}
+        }
+    },
+    "bootnodes": []
+}
+```
+
+#### Data Directory
+
+When executing the _data-dir_ flag, a **test-chain** folder is generated. The folder structure consists of the following sub-folders:
+
+* **blockchain** - Stores the LevelDB for blockchain objects
+* **trie** - Stores the LevelDB for the Merkle tries
+* **keystore** - Stores private keys for the client. This includes the libp2p private key and the sealing/validator private key
+* **consensus** - Stores any consensus information that the client might need while working
+
+### Resources
+
+* [**Protocol Buffers**](https://developers.google.com/protocol-buffers)
