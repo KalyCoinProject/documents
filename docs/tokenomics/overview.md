@@ -10,7 +10,7 @@ sidebar_label: Overview
 
 * `$KLC` token address:
     * On Kalychain: [0x7B4328c127B85369D9f82ca0503B000D09CF9180](https://explorer.kalychain.io/address/0x7B4328c127B85369D9f82ca0503B000D09CF9180)
-    * On Ethereum: [0x7B4328c127B85369D9f82ca0503B000D09CF9180](https://etherscan.io/address/0x7B4328c127B85369D9f82ca0503B000D09CF9180)
+    * On Ethereum: [0x000) Comming Soon!
 
 
 ![KLC TOKEN DISTRIBUTION](/img/gov/token.png)
