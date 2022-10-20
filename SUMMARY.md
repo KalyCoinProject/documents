@@ -51,3 +51,4 @@
   * [Tokenomics](docs/tokenomics/README.md)
     * [Tokenomics](docs/tokenomics/overview.md)
   * [Kalychain](docs/overview.md)
+* [Governance](governance.md)
