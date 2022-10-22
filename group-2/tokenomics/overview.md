@@ -15,11 +15,14 @@ sidebar_label: Overview
 
 |        **Allocation**        |   **Amount**  |                        **Vesting**                        | **Wallet address** |
 | :--------------------------: | :-----------: | :-------------------------------------------------------: | :----------------: |
-|    Private & Public Sale:    |    `1.00%`    |                       `No blocking`                       |       `0x000`      |
+|    Private & Public Sale:    |    `51.00%`   |                       `No blocking`                       |       `0x000`      |
 |        Founding Team         |    `9.00%`    |                          `20.00%`                         |       `0x000`      |
-|              ICO             |    `50.00%`   |                       `No blocking`                       |       `0x000`      |
-|     Business Development:    |    `20.00%`   | `4 years locked in with a distribution of 5 million/year` |       `0x000`      |
-| Academic Research, Education |   `20.00%`    |                                                           |                    |
+|     Business Development:    |    `10.00%`   | `4 years locked in with a distribution of 5 million/year` |       `0x000`      |
+| Academic Research, Education |    `5.00%`    |                        No blocking                        |                    |
+|    Continuous Development    |   `10.00%`    |                       2 Years locked                      |                    |
+|      Network Operations      |    `3.00%`    |                      10 Years locked                      |                    |
+|           Treasury           |    `7.00%`    |                       5 Years locked                      |                    |
+|      Advisor & Marketing     |    `5.00%`    |                       2 Years locked                      |                    |
 |           **Total**          | **`100.00%`** |                 `Distribuited in 4 years`                 |       `0x000`      |
 
 ​&#x20;
