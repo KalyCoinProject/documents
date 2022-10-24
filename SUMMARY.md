@@ -8,19 +8,37 @@
   * [CLI Commands](docs/get-started/cli-commands.mdx)
   * [JSON RPC Commands](docs/get-started/json-rpc-commands.mdx)
   * [Performance Reports](docs/get-started/performance-reports.md)
-* [Configuration](configuration/README.md)
-  * [Manage private keys](docs/configuration/manage-private-keys.md)
-  * [Set up Hashicorp Vault](docs/configuration/set-up-hashicorp-vault.md)
-  * [Enable Prometheus metrics](docs/configuration/enable-metrics.mdx)
-* [Working With Node](working-with-node/README.md)
-  * [Query JSON RPC endpoints](docs/working-with-node/query-json-rpc.md)
-  * [Query operator information](docs/working-with-node/query-operator-info.md)
-  * [Backup/restore node instance](docs/working-with-node/backup-restore.md)
+
+## Configuration
+
+* [Manage private keys](docs/configuration/manage-private-keys.md)
+* [Set up Hashicorp Vault](docs/configuration/set-up-hashicorp-vault.md)
+* [Enable Prometheus metrics](docs/configuration/enable-metrics.mdx)
+
+## Group 2
+
+* [Concepts](group-2/concepts/README.md)
+  * [State in Ethereum](group-2/concepts/ethereum-state.md)
+* [How-tos](group-2/how-tos/README.md)
+  * [How to set up and use Proof of Stake (PoS)](group-2/how-tos/howto-stake-unstake.md)
+* [Tokenomics](group-2/tokenomics/README.md)
+  * [Tokenomics](group-2/tokenomics/overview.md)
+* [Kalychain](group-2/overview.md)
+
+## Group 1
+
+* [Query JSON RPC endpoints](group-1/query-json-rpc.md)
+* [Query operator information](group-1/query-operator-info.md)
+* [Backup/restore node instance](group-1/backup-restore.md)
+
+***
+
 * [Consensus](consensus/README.md)
   * [Proof of Authority (PoA)](docs/consensus/poa.md)
   * [Proof of Stake](docs/consensus/pos-concepts.md)
   * [Set up and use Proof of Stake (PoS)](docs/consensus/pos-stake-unstake.md)
   * [Migration from PoA to PoS](docs/consensus/migration-to-pos.md)
+* [Governance](governance.md)
 * [Additional Features](additional-features/README.md)
   * [Blockscout](docs/additional-features/blockscout.md)
   * [Network stress testing](docs/additional-features/stress-testing.md)
@@ -43,11 +61,11 @@
 * [Community](community/README.md)
   * [Propose a new feature](docs/community/propose-new-feature.md)
   * [Report an issue](docs/community/report-bug.md)
-* [Docs](docs/README.md)
-  * [Concepts](docs/concepts/README.md)
-    * [State in Ethereum](docs/concepts/ethereum-state.md)
-  * [How-tos](docs/how-tos/README.md)
-    * [How to set up and use Proof of Stake (PoS)](docs/how-tos/howto-stake-unstake.md)
-  * [Tokenomics](docs/tokenomics/README.md)
-    * [Tokenomics](docs/tokenomics/overview.md)
-  * [Kalychain](docs/overview.md)
+
+## Group 3
+
+* [Page 2](group-3/page-2.md)
+
+## Group 4
+
+* [Page 3](group-4/page-3.md)
