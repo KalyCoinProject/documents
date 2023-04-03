@@ -28,21 +28,21 @@ Full node deployment of the Kalychain blockchain.
 * wget:
 
 ```shell
-$ DOGECHAIN_VERSION=$(wget -qO- https://api.github.com/repos/kalycoinproject/kalychain/releases/latest | grep tag_name | cut -d '"' -f 4 | cut -d 'v' -f 2)
-$ wget -c https://github.com/kalycoinproject/kalychain/releases/download/v${DOGECHAIN_VERSION}/kalychain_${DOGECHAIN_VERSION}_linux_amd64.tar.gz
+$ KALYCHAIN_VERSION=$(wget -qO- https://api.github.com/repos/kalycoinproject/kalychain/releases/latest | grep tag_name | cut -d '"' -f 4 | cut -d 'v' -f 2)
+$ wget -c https://github.com/kalycoinproject/kalychain/releases/download/v${KALYCHAIN_VERSION}/kalychain_${KALYCHAIN_VERSION}_linux_amd64.tar.gz
 ```
 
 * curl:
 
 ```shell
-$ DOGECHAIN_VERSION=$(curl -s https://api.github.com/repos/kalycoinproject/kalychain/releases/latest | grep tag_name | cut -d '"' -f 4 | cut -d 'v' -f 2)
-$ curl -OL https://github.com/kalycoinproject/kalychain/releases/download/v${DOGECHAIN_VERSION}/kalychain_${DOGECHAIN_VERSION}_linux_amd64.tar.gz
+$ KALYCHAIN_VERSION=$(curl -s https://api.github.com/repos/kalycoinproject/kalychain/releases/latest | grep tag_name | cut -d '"' -f 4 | cut -d 'v' -f 2)
+$ curl -OL https://github.com/kalycoinproject/kalychain/releases/download/v${KALYCHAIN_VERSION}/kalychain_${KALYCHAIN_VERSION}_linux_amd64.tar.gz
 ```
 
 ## copy binary to /usr/local/bin
 
 ```shell
-$ tar -xvf kalychain_${DOGECHAIN_VERSION}_linux_amd64.tar.gz
+$ tar -xvf kalychain_${KALYCHAIN_VERSION}_linux_amd64.tar.gz
 $ cp kalychain /usr/local/bin/kalychain
 $ chmod +x /usr/local/bin/kalychain
 ```
